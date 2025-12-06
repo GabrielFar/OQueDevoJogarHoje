@@ -101,7 +101,7 @@ let jogos = [
         genero: "fps",
         plataformas: ["pc"],
         tempo: "curto",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/f/f6/Valorant_cover_art.jpg"
+        imagem: "imagens/valorant.jpg"
     },
     {
         id: 13,
@@ -187,7 +187,7 @@ let jogos = [
         genero: "estrategia",
         plataformas: ["pc"],
         tempo: "curto",
-        imagem: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/League_of_Legends_2019_vector.svg/600px-League_of_Legends_2019_vector.svg.png"
+        imagem: "imagens/league_of_legends.jpg"
     },
     {
         id: 23,
@@ -211,7 +211,7 @@ let jogos = [
         genero: "estrategia",
         plataformas: ["pc", "mobile"],
         tempo: "curto",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/6/6f/Teamfight_Tactics_logo.png"
+        imagem:"imagens/teamfight_tactics.jpg"
     },
 
     // 6. SIMULAÇÃO
@@ -254,7 +254,7 @@ let jogos = [
         genero: "simulacao",
         plataformas: ["switch"],
         tempo: "longo",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/1/1f/Animal_Crossing_New_Horizons.jpg"
+        imagem: "imagens/animal_crossing_new_horizons.jpg"
     },
 
     // 7. ESPORTE / CORRIDA
@@ -281,7 +281,7 @@ let jogos = [
         genero: "esporte",
         plataformas: ["switch"],
         tempo: "curto",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/b/b5/Mario_Kart_8_Deluxe.jpg"
+        imagem: "imagens/mario_kart_8_deluxe.jpg"
     },
     {
         id: 34,
@@ -297,7 +297,7 @@ let jogos = [
         genero: "esporte",
         plataformas: ["ps4", "ps5"],
         tempo: "longo",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/1/1a/Gran_Turismo_7_cover_art.jpg"
+        imagem: "imagens/gran_turismo_7.jpg"
     },
 
     // 8. LUTA
@@ -332,7 +332,7 @@ let jogos = [
         genero: "luta",
         plataformas: ["switch"],
         tempo: "curto",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/5/50/Super_Smash_Bros._Ultimate.jpg"
+        imagem: "imagens/super_smash_bros_ultimate.jpg"
     },
     {
         id: 40,
@@ -418,7 +418,7 @@ let jogos = [
         genero: "plataforma",
         plataformas: ["switch"],
         tempo: "medio",
-        imagem: "https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Mario_Odyssey.jpg"
+        imagem: "/imagens/super_mario_odyssey.jpg"
     },
     {
         id: 50,

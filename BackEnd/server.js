@@ -1,6 +1,8 @@
 const express = require("express");
 const jogosRouter = require("./controllers/jogo_controller");
 
+const path = require('path');
+app.use('/imagens', express.static(path.join(__dirname, 'imagens')));
 const app = express();
 app.use(express.json());
 
