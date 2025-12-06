@@ -13,10 +13,13 @@ const obterJogoPorId = (id) => {
 
 // Função para criar um novo jogo
 const criarJogo = (jogo) => {
-	db.query("INSERT INTO jogo (id, nome, email) VALUES ($1, $2, $3)", [
+	db.query("INSERT INTO jogo (id, nome, generoId, plataformasId, tempo, imagem) VALUES ($1, $2, $3, $4, $5, $6)", [
 		jogo.id,
 		jogo.nome,
-		jogo.email,
+		jogo.generoId,
+		jogo.plataformasId,
+		jogo.tempo,
+		jogo.imagem,
 	]);
 	return jogo;
 };
@@ -25,15 +28,18 @@ const criarJogo = (jogo) => {
 const atualizarJogo = (jogo) => {
 	try {
 		// Atualizar o jogo
-		db.query("UPDATE jogo SET nome = $1, email = $2 WHERE id = $3", [
+		db.query("UPDATE jogo SET nome = $1, generoId = $2, plataformasId = $3, tempo = $4, imagem = $5 WHERE id = $6", [
 			jogo.nome,
-			jogo.email,
+			jogo.generoId,
+			jogo.plataformasId,
+			jogo.tempo,
+			jogo.imagem,
 			jogo.id,
 		]);
 
 		// Retornar o jogo atualizado
 		const result = db.query(
-			"SELECT id, nome, email FROM jogo WHERE id = $1",
+			"SELECT id, nome, generoId, plataformasId, tempo, imagem FROM jogo WHERE id = $1",
 			[jogo.id],
 		);
 

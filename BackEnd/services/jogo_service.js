@@ -13,19 +13,22 @@ const retornaTodosJogos = async (req, res) => {
 
 // Função para criar um novo jogo
 const criaJogo = async (req, res) => {
-	const { id, nome, email } = req.body;
-	console.log({ id, nome, email });
+	const { id, nome, generoId, plataformasId, tempo, imagem } = req.body;
+	console.log({ id, nome, generoId, plataformasId, tempo, imagem });
 	try {
-		if (!id || !nome || !email) {
+		if (!id || !nome || !generoId || !plataformasId || plataformasId.length === 0 || !tempo || !imagem) {
 			return res
 				.status(400)
-				.json({ message: "ID, nome e email são obrigatórios." });
+				.json({ message: "ID, nome, genero, plataforms, tempo e imagem são obrigatórios." });
 		}
 
 		const jogo = await jogoRepository.criarJogo({
 			id,
 			nome,
-			email,
+			generoId,
+			plataformasId,
+			tempo,
+			imagem,
 		});
 		res.status(201).json(jogo);
 	} catch (error) {
@@ -36,13 +39,16 @@ const criaJogo = async (req, res) => {
 
 // Função para atualizar um jogo
 const atualizaJogo = async (req, res) => {
-	const { nome, email } = req.body;
+	const { nome, generoId, plataformasId, tempo, imagem } = req.body;
 	const id = parseInt(req.params.id);
 	try {
 		const jogoAtualizado = await jogoRepository.atualizarJogo({
 			id,
 			nome,
-			email,
+			generoId,
+			plataformasId,
+			tempo,
+			imagem,
 		});
 
 		if (jogoAtualizado) {
