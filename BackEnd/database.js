@@ -453,4 +453,33 @@ let plataformas = [
     { id: 6, nome: "Mobile" }
 ];
 
-module.exports = { jogos, generos, plataformas };
+let permissoes = [
+    { id: 1, descricao: "ADMIN" },
+    { id: 2, descricao: "COMUM" }
+];
+
+let usuarios = [
+    {
+        email: "admin@playtoday.com",
+        nome: "Administrador",
+        senha: "$2b$10$7v0i.e.1.1.1.1.1.1.1.1.u1y8w.1.1.1.1.1.1.1.1.1.1.1.1"
+    },
+    {
+        email: "user@playtoday.com",
+        nome: "Usuário Comum",
+        senha: "$2b$10$7v0i.e.1.1.1.1.1.1.1.1.u1y8w.1.1.1.1.1.1.1.1.1.1.1.1"
+    }
+];
+
+let usuario_permissao = [
+    { email: "admin@playtoday.com", id_permissao: 1 },
+    { email: "user@playtoday.com", id_permissao: 2 }
+];
+module.exports = {
+    jogos,
+    generos,
+    plataformas,
+    usuarios,
+    permissoes,
+    usuario_permissao
+};
