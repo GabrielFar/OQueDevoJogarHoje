@@ -1,6 +1,6 @@
 const express = require("express");
 const passport = require("passport");
-const authService = require("../services/auth_service");
+const authService = require("../services/auth-service");
 
 const authRouter = express.Router();
 
@@ -11,7 +11,5 @@ authRouter.post(
 );
 
 authRouter.post("/logout", authService.logout);
-
-authRouter.post("/novoUsuario", authService.cadastraUsuario);
 
 module.exports = authRouter;
