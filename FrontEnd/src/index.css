@@ -1,0 +1,137 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+}
+
+.login-banner {
+  width: 100vw;
+  max-width: 750px;
+  height: auto;
+  display: block;
+}
+
+.login-logo {
+  max-width: 300px;
+  margin-bottom: 20px;
+  width: 100%;
+  object-fit: contain;
+}
+
+.login-subtitle {
+  color: #666;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.login-container {
+  background-color: #FF6B4A;
+  border-radius: 25px;
+  padding: 32px;
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.input-label {
+  color: white;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  font-family: "Arial Black", Gadget, sans-serif;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  display: block;
+}
+
+.input-wrapper {
+  background-color: white;
+  border-radius: 25px;
+  padding: 8px 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #333;
+  background: transparent;
+  padding: 5px;
+}
+
+.login-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 10px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.login-btn:hover:not(:disabled) {
+  background-color: white;
+  color: #FF6B4A;
+}
+
+.login-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error-banner {
+  background-color: #FF3333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 0.9rem;
+  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  animation: fadeIn 0.3s ease-in;
+}
+
+.feedback-area {
+  margin-top: 24px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #e1e1e1;
+  border-top: 5px solid #666;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
