@@ -4,10 +4,7 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
-const usuarioRepository = require("../repositories/usuario-repository");
-const permissaoRepository = require("../repositories/permissao-repository");
-const usuarioPermissaoRepository = require("../repositories/usuario_permissao-repository");
+const db = require("../database"); 
 
 const configureLocalStrategy = () => {
   passport.use(
@@ -17,17 +14,22 @@ const configureLocalStrategy = () => {
         passwordField: "password",
       },
       async (username, password, done) => {
+        console.log("Tentativa de login:", username, password);
         try {
-          const user = await usuarioRepository.obterUsuarioPorEmail(username);
+          const user = db.usuarios.find((u) => u.email === username);
 
           if (!user) {
             return done(null, false, { message: "Usuário incorreto." });
           }
-
-          const passwordMatch = await bcrypt.compare(password, user.senha);
+          
+          let passwordMatch = false;
+          if (user.senha.startsWith("$2")) {
+            passwordMatch = await bcrypt.compare(password, user.senha);
+          } else {
+            passwordMatch = (password === user.senha);
+          }
 
           if (passwordMatch) {
-            console.log("Usuário autenticado!");
             return done(null, user);
           } else {
             return done(null, false, { message: "Senha incorreta." });
@@ -49,7 +51,7 @@ const configureJwtStrategy = () => {
       },
       async (payload, done) => {
         try {
-          const user = await usuarioRepository.obterUsuarioPorEmail(payload.username);
+          const user = db.usuarios.find((u) => u.email === payload.username);
 
           if (user) {
             done(null, user);
@@ -81,23 +83,6 @@ const configureSerialization = () => {
   });
 };
 
-const criarNovoUsuario = async (userData) => {
-  const saltRounds = 10;
-  const { username, passwd, nome } = userData;
-  const userEmail = username;
-  const userName = nome || userEmail;
-  const salt = bcrypt.genSaltSync(saltRounds);
-  const hashedPasswd = bcrypt.hashSync(passwd, salt);
-
-  await usuarioRepository.criarUsuario({
-    email: userEmail,
-    nome: userName,
-    senha: hashedPasswd,
-  });
-
-  return { email: userEmail, nome: userName };
-};
-
 const gerarToken = (username) => {
   return jwt.sign({ username: username }, "OQueDevoJogarHoje2025", {
     expiresIn: "1h",
@@ -106,34 +91,16 @@ const gerarToken = (username) => {
 
 const requireJWTAuth = passport.authenticate("jwt", { session: false });
 
-const verificarPermissaoPorDescricao = async (email, descricaoPermissao) => {
-  try {
-    const permissao = await permissaoRepository.obterPermissaoPorDescricao(descricaoPermissao);
+const verificarPermissaoPorDescricao = (email, descricaoPermissao) => {
+  const permissao = db.permissoes.find((p) => p.descricao === descricaoPermissao);
 
-    if (!permissao) {
-      return false;
-    }
+  if (!permissao) return false;
 
-    const temPermissao = await usuarioPermissaoRepository.verificarPermissaoUsuario(
-      email,
-      permissao.id
-    );
+  const temPermissao = db.usuario_permissao.find(
+    (up) => up.email === email && up.id_permissao === permissao.id
+  );
 
-    return temPermissao;
-  } catch (error) {
-    console.error("Erro ao verificar permissão:", error);
-    return false;
-  }
-};
-
-const obterPermissoesUsuario = async (email) => {
-  try {
-    const permissoes = await usuarioPermissaoRepository.obterPermissoesPorUsuario(email);
-    return permissoes;
-  } catch (error) {
-    console.error("Erro ao obter permissões do usuário:", error);
-    return [];
-  }
+  return !!temPermissao;
 };
 
 const verificarPermissaoMiddleware = (descricaoPermissao) => {
@@ -144,10 +111,7 @@ const verificarPermissaoMiddleware = (descricaoPermissao) => {
       }
 
       const email = req.user.email;
-      const temPermissao = await verificarPermissaoPorDescricao(
-        email,
-        descricaoPermissao
-      );
+      const temPermissao = verificarPermissaoPorDescricao(email, descricaoPermissao);
 
       if (!temPermissao) {
         return res.status(403).json({
@@ -173,10 +137,7 @@ const requirePermissao = (descricaoPermissao) => {
         }
 
         const email = req.user.email;
-        const temPermissao = await verificarPermissaoPorDescricao(
-          email,
-          descricaoPermissao
-        );
+        const temPermissao = verificarPermissaoPorDescricao(email, descricaoPermissao);
 
         if (!temPermissao) {
           return res.status(403).json({
@@ -186,7 +147,6 @@ const requirePermissao = (descricaoPermissao) => {
 
         next();
       } catch (error) {
-        console.error("Erro ao verificar permissão:", error);
         return res.status(500).json({ message: "Erro interno do servidor." });
       }
     },
@@ -207,33 +167,14 @@ const logout = (req, res, next) => {
   });
 };
 
-const cadastraUsuario = async (req, res) => {
-  try {
-    await criarNovoUsuario({
-      username: req.body.username,
-      passwd: req.body.passwd,
-      nome: req.body.nome,
-    });
-    console.log("Usuário inserido");
-    res.sendStatus(200);
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(400);
-  }
-};
-
 module.exports = {
   configureLocalStrategy,
   configureJwtStrategy,
   configureSerialization,
-  criarNovoUsuario,
   gerarToken,
   requireJWTAuth,
-  verificarPermissaoPorDescricao,
-  obterPermissoesUsuario,
   verificarPermissaoMiddleware,
   requirePermissao,
   login,
-  logout,
-  cadastraUsuario,
+  logout
 };

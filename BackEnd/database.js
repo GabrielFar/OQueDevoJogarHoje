@@ -1,4 +1,3 @@
-// ...existing code...
 let jogos = [
        //1. AÇÃO E AVENTURA
 
@@ -462,12 +461,12 @@ let usuarios = [
     {
         email: "admin@playtoday.com",
         nome: "Administrador",
-        senha: "$2b$10$7v0i.e.1.1.1.1.1.1.1.1.u1y8w.1.1.1.1.1.1.1.1.1.1.1.1"
+        senha: "123456"
     },
     {
         email: "user@playtoday.com",
         nome: "Usuário Comum",
-        senha: "$2b$10$7v0i.e.1.1.1.1.1.1.1.1.u1y8w.1.1.1.1.1.1.1.1.1.1.1.1"
+        senha: "123456"
     }
 ];
 

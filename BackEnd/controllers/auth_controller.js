@@ -12,6 +12,4 @@ authRouter.post(
 
 authRouter.post("/logout", authService.logout);
 
-authRouter.post("/novoUsuario", authService.cadastraUsuario);
-
 module.exports = authRouter;

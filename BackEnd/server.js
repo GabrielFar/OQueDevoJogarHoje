@@ -3,13 +3,11 @@ const cors = require("cors");
 const path = require('path');
 const session = require("express-session");
 const passport = require("passport");
+
 const jogosRouter = require("./controllers/jogo_controller");
 const generosRouter = require("./controllers/genero_controller");
 const plataformasRouter = require("./controllers/plataforma_controller");
 const authRouter = require("./controllers/auth_controller");
-const usuarioRouter = require("./controllers/usuario_controller");
-const permissaoRouter = require("./controllers/permissao_controller");
-const usuarioPermissaoRouter = require("./controllers/usuario_permissao_controller");
 
 const authService = require("./services/auth_service");
 
@@ -17,8 +15,6 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
-app.use('/imagens', express.static(path.join(__dirname, 'imagens')));
 
 app.use(
     session({
@@ -44,7 +40,3 @@ app.use("/", authRouter);
 app.use("/jogos", jogosRouter);
 app.use("/generos", generosRouter);
 app.use("/plataformas", plataformasRouter);
-
-app.use("/usuario", usuarioRouter);
-app.use("/permissao", permissaoRouter);
-app.use("/usuario_permissao", usuarioPermissaoRouter);
