@@ -16,8 +16,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use('/imagens', express.static(path.join(__dirname, 'imagens')));
-
 app.use(
     session({
         secret: "uma_chave_secreta_para_a_loja_de_jogos",

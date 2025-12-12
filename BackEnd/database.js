@@ -461,12 +461,12 @@ let usuarios = [
     {
         email: "admin@playtoday.com",
         nome: "Administrador",
-        senha: "$2a$12$Gw4/1.1.1.1.1.1.1.1.1.u.1.1.1.1.1.1.1.1.1.1.1.1.1"
+        senha: "123456"
     },
     {
         email: "user@playtoday.com",
         nome: "Usuário Comum",
-        senha: "$2a$12$Gw4/1.1.1.1.1.1.1.1.1.u.1.1.1.1.1.1.1.1.1.1.1.1.1"
+        senha: "123456"
     }
 ];
 

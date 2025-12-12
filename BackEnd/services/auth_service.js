@@ -14,6 +14,7 @@ const configureLocalStrategy = () => {
         passwordField: "password",
       },
       async (username, password, done) => {
+        console.log("Tentativa de login:", username, password);
         try {
           const user = db.usuarios.find((u) => u.email === username);
 
