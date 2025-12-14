@@ -101,7 +101,7 @@ let jogos = [
         generoId: 3,
         plataformasId: [1],
         tempo: "curto",
-        imagem: "imagens/valorant.jpg"
+        imagem: "/valorant.jpg"
     },
     {
         id: 13,
@@ -187,7 +187,7 @@ let jogos = [
         generoId: 5,
         plataformasId: [1],
         tempo: "curto",
-        imagem: "imagens/league_of_legends.jpg"
+        imagem: "/league_of_legends.jpg"
     },
     {
         id: 23,
@@ -211,7 +211,7 @@ let jogos = [
         generoId: 5,
         plataformasId: [1, 6],
         tempo: "curto",
-        imagem:"imagens/teamfight_tactics.jpg"
+        imagem:"/teamfight_tactics.jpg"
     },
 
     // 6. SIMULAÇÃO
@@ -254,7 +254,7 @@ let jogos = [
         generoId: 6,
         plataformasId: [5],
         tempo: "longo",
-        imagem: "imagens/animal_crossing_new_horizons.jpg"
+        imagem: "/animal_crossing_new_horizons.jpg"
     },
 
     // 7. ESPORTE / CORRIDA
@@ -281,7 +281,7 @@ let jogos = [
         generoId: 7,
         plataformasId: [5],
         tempo: "curto",
-        imagem: "imagens/mario_kart_8_deluxe.jpg"
+        imagem: "/mario_kart_8_deluxe.jpg"
     },
     {
         id: 34,
@@ -297,7 +297,7 @@ let jogos = [
         generoId: 7,
         plataformasId: [2, 3],
         tempo: "longo",
-        imagem: "imagens/gran_turismo_7.jpg"
+        imagem: "/gran_turismo_7.jpg"
     },
 
     // 8. LUTA
@@ -332,7 +332,7 @@ let jogos = [
         generoId: 8,
         plataformasId: [5],
         tempo: "curto",
-        imagem: "imagens/super_smash_bros_ultimate.jpg"
+        imagem: "/super_smash_bros_ultimate.jpg"
     },
     {
         id: 40,
@@ -418,7 +418,7 @@ let jogos = [
         generoId: 10,
         plataformasId: [5],
         tempo: "medio",
-        imagem: "/imagens/super_mario_odyssey.jpg"
+        imagem: "/super_mario_odyssey.jpg"
     },
     {
         id: 50,

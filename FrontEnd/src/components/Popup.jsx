@@ -6,9 +6,9 @@ export default function PopUp ({ trigger, children }) {
 
   return (
     <div className="popup-container">
-      <button onClick={() => setIsOpen(!isOpen)} className="popup-trigger">
+      <div onClick={() => setIsOpen(!isOpen)} className="popup-trigger">
         {trigger}
-      </button>
+      </div>
 
       {isOpen && (
         <div className="popup-overlay">
