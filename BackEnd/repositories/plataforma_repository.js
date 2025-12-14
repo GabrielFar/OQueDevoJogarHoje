@@ -13,44 +13,28 @@ const obterPlataformaPorId = (id) => {
 
 // Função para criar um novo plataforma
 const criarPlataforma = (plataforma) => {
-	db.query("INSERT INTO plataforma (id, nome) VALUES ($1, $2)", [
-		plataforma.id,
-		plataforma.nome
-	]);
+	plataformas.push(plataforma);
 	return plataforma;
 };
 
 // Função para atualizar um plataforma
 const atualizarPlataforma = (plataforma) => {
-	try {
-		// Atualizar o plataforma
-		db.query("UPDATE plataforma SET nome = $1 WHERE id = $2", [
-			plataforma.nome,
-			plataforma.id,
-		]);
-
-		// Retornar o plataforma atualizado
-		const result = db.query(
-			"SELECT id, nome FROM plataforma WHERE id = $1",
-			[plataforma.id],
-		);
-
-		return result[0];
-	} catch (error) {
-		throw error;
+	const plataformaExistente = plataformas.find(p => p.id === plataforma.id);
+	if (!plataformaExistente) {
+		return null;
 	}
+	plataformaExistente.nome = plataforma.nome;
+	return plataformaExistente;
 };
 
 // Função para deletar um plataforma
 const deletarPlataforma = (plataforma) => {
-	try {
-		// Deletar o plataforma
-		db.query("DELETE FROM plataforma WHERE id = $1", [plataforma.id]);
-
-		return plataforma;
-	} catch (error) {
-		throw error;
+	const index = plataformas.findIndex(p => p.id === plataforma.id);
+	if (index === -1) {
+		return false;
 	}
+	plataformas.splice(index, 1);
+	return true;
 };
 
 module.exports = {

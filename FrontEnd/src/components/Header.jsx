@@ -19,45 +19,24 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
     handleCloseNavMenu();
     if (item === "Admin") onNavigate("admin");
     else if (item === "Quem Somos?") onNavigate("quemSomos");
-    else if (item === "Minha Lista") onNavigate("minhaLista");
   };
 
-  const navItems = ["Admin", "Quem Somos?", "Minha Lista"];
+  const navItems = ["Admin", "Quem Somos?"];
 
-  const getButtonStyle = (itemName) => {
+  const getButtonClassName = (itemName) => {
     const pageMap = {
       "Admin": "admin",
       "Quem Somos?": "quemSomos",
-      "Minha Lista": "minhaLista"
     };
 
     const isActive = currentPage === pageMap[itemName];
+    const isSpecial = itemName === "Admin";
 
-    if ((itemName === "Minha Lista" || itemName === "Admin") && isActive) {
-      return {
-        bgcolor: '#FF7043',
-        color: 'white',
-        fontWeight: 'bold',
-        px: 3,
-        py: 1,
-        borderRadius: 20,
-        textTransform: 'none',
-        boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-        '&:hover': { bgcolor: '#F4511E' }
-      };
+    if (isSpecial && isActive) {
+      return "header-nav-button header-nav-button-active";
     }
 
-    return {
-      color: 'white',
-      fontWeight: 'bold',
-      px: 2,
-      py: 1,
-      borderRadius: 2,
-      textTransform: 'none',
-      '&:hover': {
-        bgcolor: 'rgba(255,255,255,0.1)',
-      }
-    };
+    return "header-nav-button";
   };
 
   return (
@@ -78,7 +57,7 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
               <Button
                 key={item}
                 onClick={() => handleMenuClick(item)}
-                className="header-nav-button"
+                className={getButtonClassName(item)}
               >
                 {item}
               </Button>
@@ -99,7 +78,7 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
             </Box>
           </Box>
 
-          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+          <Box className="header-mobile-section">
             <IconButton
               size="large"
               aria-label="menu"
@@ -116,7 +95,7 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
               transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{ display: { xs: 'block', md: 'none' } }}
+              className="header-mobile-menu-dropdown"
             >
               <Box className="header-mobile-menu-user">
                 <Typography variant="caption" color="text.secondary">Logado como:</Typography>

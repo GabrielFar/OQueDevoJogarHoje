@@ -5,7 +5,6 @@ import MagicSection from "../components/MagicSection";
 import FilterBar from "../components/FilterBar";
 import GameGrid from "../components/GameGrid";
 import QuemSomos from "../components/QuemSomos";
-import MinhaLista from "../components/MinhaLista";
 import AdminPanel from "../components/AdminPanel";
 import "./styles.css";
 
@@ -38,8 +37,6 @@ export default function Home({ userEmail, handleLogout }) {
         );
       case "quemSomos":
         return <QuemSomos />;
-      case "minhaLista":
-        return <MinhaLista />;
       case "admin":
         return <AdminPanel />;
       default:
