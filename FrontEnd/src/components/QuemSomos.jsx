@@ -50,7 +50,7 @@ export default function QuemSomos() {
                   Rhaiane Alena Allebrandt
                 </Typography>
                 <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
-                  DEV FRONT
+                  DEV
                 </Typography>
               </Box>
 
@@ -68,7 +68,7 @@ export default function QuemSomos() {
                   Gabriel Bochi Farina
                 </Typography>
                 <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
-                  DEV BACK
+                  DEV
                 </Typography>
               </Box>
 
