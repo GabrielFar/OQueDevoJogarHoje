@@ -3,7 +3,6 @@ import "./styles.css";
 
 export default function GameCard(jogo) {
   const jogoInfo = jogo.jogo;
-  console.log(jogoInfo.imagem);
 
   return (
     <Card elevation={0} className="game-card">

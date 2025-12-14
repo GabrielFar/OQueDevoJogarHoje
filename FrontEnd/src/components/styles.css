@@ -215,15 +215,17 @@
   padding-right: 16px;
 }
 
-.magic-title-small {
+.title-small {
   font-weight: bold !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 20px !important;
   color: #000;
   font-size: 1rem !important;
+  display: flex;
+  justify-content: center;
 }
 
 @media (min-width: 900px) {
-  .magic-title-small {
+  .title-small {
     font-size: 1.25rem !important;
   }
 }

@@ -97,7 +97,7 @@ const questionsData = [
   }
 ];
 
-export default function QuizGame() {
+export default function QuizGame({ trigger }) {
   const [generos, setGeneros] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -110,7 +110,7 @@ export default function QuizGame() {
       setLoading(true);
       try {
         const response = await axios.get("http://localhost:3002/generos/todos");
-        setGeneros(response.data.generos);
+        setGeneros(response.data.generos || response.data);
       } catch (err) {
         console.error("Erro ao buscar gêneros:", err);
       } finally {
@@ -178,7 +178,6 @@ export default function QuizGame() {
       if (found) {
         setResultGenre(found.nome);
       } else {
-        
         setResultGenre(generos[0].nome);
       }
     } else {
@@ -260,9 +259,11 @@ export default function QuizGame() {
 
   return (
     <PopUp trigger={
-        <Button variant="contained" color="warning" size="large" className="quiz-trigger-btn">
-            🎲 O que devo jogar hoje?
-        </Button>
+        trigger || (
+            <Button variant="contained" color="warning" size="large" className="quiz-trigger-btn">
+                🎲 O que devo jogar hoje?
+            </Button>
+        )
     }>
       {renderContent()}
     </PopUp>

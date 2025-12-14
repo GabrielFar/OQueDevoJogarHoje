@@ -1,16 +1,10 @@
 import { Box, Typography, Button } from "@mui/material";
+import QuizGame from "./QuizGame";
 import "./styles.css";
 
 export default function MagicSection() {
   return (
     <Box className="magic-section">
-      <Typography 
-        variant="h6" 
-        className="magic-title-small"
-      >
-        Recomendações:
-      </Typography>
-
       <Typography 
         variant="h4" 
         color="primary" 
@@ -19,13 +13,17 @@ export default function MagicSection() {
         JOGO DO DIA!
       </Typography>
 
-      <Button 
-        variant="contained" 
-        size="large"
-        className="magic-button"
-      >
-        Clique e veja a mágica acontecer!
-      </Button>
+      <QuizGame 
+        trigger={
+          <Button 
+            variant="contained" 
+            size="large"
+            className="magic-button"
+          >
+            Clique e veja a mágica acontecer!
+          </Button>
+        }
+      />
     </Box>
   );
 }
