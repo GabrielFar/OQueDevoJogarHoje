@@ -2,6 +2,7 @@ import { useState } from "react";
 import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import bannerImg from "../../public/Banner.png";
+import "./styles.css";
 
 export default function Header({ userEmail, handleLogout, onNavigate, currentPage }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
@@ -60,53 +61,38 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
   };
 
   return (
-    <AppBar position="static" elevation={0} sx={{ bgcolor: '#9e3a0e' }}>
+    <AppBar position="static" elevation={0} className="header-appbar">
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ justifyContent: 'space-between', py: 1 }}>
+        <Toolbar disableGutters className="header-toolbar">
 
           <Box
             component="img"
             src={bannerImg}
             alt="Banner"
             onClick={() => onNavigate("home")}
-            sx={{
-              maxWidth: { xs: '140px', sm: '200px', md: '350px' },
-              height: 'auto',
-              objectFit: 'contain',
-              mr: 2,
-              cursor: 'pointer'
-            }}
+            className="header-logo"
           />
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-end', alignItems: 'center', gap: 1 }}>
+          <Box className="header-desktop-nav">
             {navItems.map((item) => (
               <Button
                 key={item}
                 onClick={() => handleMenuClick(item)}
-                sx={getButtonStyle(item)}
+                className="header-nav-button"
               >
                 {item}
               </Button>
             ))}
 
-            <Box sx={{ display: 'flex', alignItems: 'center', ml: 3, gap: 2 }}>
-              <Typography variant="body2" sx={{ fontWeight: 'bold', color: 'white', opacity: 0.9 }}>
+            <Box className="header-user-section">
+              <Typography variant="body2" className="header-user-text">
                 {userEmail || "Usuário"}
               </Typography>
               <Button 
                 variant="outlined" 
                 size="small" 
                 onClick={handleLogout}
-                sx={{ 
-                  color: 'white', 
-                  borderColor: 'rgba(255,255,255,0.5)',
-                  px: 3,
-                  '&:hover': { 
-                    borderColor: '#fff', 
-                    bgcolor: '#d84315',
-                    fontWeight: 'bold'
-                  }
-                }}
+                className="header-logout-button"
               >
                 Sair
               </Button>
@@ -118,7 +104,7 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
               size="large"
               aria-label="menu"
               onClick={handleOpenNavMenu}
-              sx={{ color: 'white' }}
+              className="header-mobile-menu-icon"
             >
               <MenuIcon />
             </IconButton>
@@ -132,21 +118,18 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-               {navItems.map((item) => (
+              <Box className="header-mobile-menu-user">
+                <Typography variant="caption" color="text.secondary">Logado como:</Typography>
+                <Typography variant="subtitle2" className="header-mobile-user-email">{userEmail}</Typography>
+              </Box>
+
+              {navItems.map((item) => (
                 <MenuItem key={item} onClick={() => handleMenuClick(item)}>
-                  <Typography 
-                      textAlign="center" 
-                      sx={{ 
-                          fontWeight: '500',
-                          color: (item === "Minha Lista" || item === "Admin") && getButtonStyle(item).bgcolor ? '#FF7043' : 'inherit'
-                      }}
-                  >
-                      {item}
-                  </Typography>
+                  <Typography textAlign="center" className="header-mobile-item-text">{item}</Typography>
                 </MenuItem>
               ))}
-              <MenuItem onClick={handleLogout}>
-                <Typography textAlign="center" color="error">Sair</Typography>
+              <MenuItem onClick={handleLogout} className="header-mobile-logout">
+                <Typography textAlign="center" className="header-mobile-logout-text">Sair</Typography>
               </MenuItem>
             </Menu>
           </Box>

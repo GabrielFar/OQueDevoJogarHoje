@@ -7,6 +7,7 @@ import GameGrid from "../components/GameGrid";
 import QuemSomos from "../components/QuemSomos";
 import MinhaLista from "../components/MinhaLista";
 import AdminPanel from "../components/AdminPanel";
+import "./styles.css";
 
 export default function Home({ userEmail, handleLogout }) {
   const [currentPage, setCurrentPage] = useState("home");
@@ -33,8 +34,7 @@ export default function Home({ userEmail, handleLogout }) {
   };
 
   return (
-    <Box sx={{ bgcolor: 'white', minHeight: '100vh', pb: 8 }}>
-
+    <Box className="home-container">
       <Header 
         userEmail={userEmail} 
         handleLogout={handleLogout} 

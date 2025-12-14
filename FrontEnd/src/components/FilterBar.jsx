@@ -1,9 +1,10 @@
 import { Stack, Button, TextField, InputAdornment, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import "./styles.css";
 
 export default function FilterBar() {
   return (
-    <Box sx={{ px: 2, my: 4 }}>
+    <Box className="filter-bar-container">
       <Stack 
         direction={{ xs: 'column-reverse', sm: 'row' }} 
         justifyContent="space-between" 
@@ -13,13 +14,7 @@ export default function FilterBar() {
         <Button 
           variant="contained" 
           fullWidth={false}
-          sx={{ 
-            borderRadius: 20, 
-            bgcolor: '#A1887F', 
-            px: 4,
-            width: { xs: '100%', sm: 'auto' }, 
-            '&:hover': { bgcolor: '#8D6E63' }
-          }}
+          className="filter-button"
         >
           Filtros
         </Button>
@@ -29,10 +24,7 @@ export default function FilterBar() {
           variant="outlined"
           size="small"
           fullWidth
-          sx={{ 
-            maxWidth: { xs: '100%', sm: '300px' },
-            '& .MuiOutlinedInput-root': { borderRadius: 20 }
-          }}
+          className="filter-textfield"
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
