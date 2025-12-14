@@ -47,10 +47,10 @@ export default function QuemSomos() {
                   }} 
                 />
                 <Typography variant="caption" display="block" color="text.secondary">
-                  Rhaiane Alena Allebrandt
+                  DEV
                 </Typography>
                 <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
-                  DEV
+                  Rhaiane
                 </Typography>
               </Box>
 
@@ -65,10 +65,10 @@ export default function QuemSomos() {
                   }} 
                 />
                 <Typography variant="caption" display="block" color="text.secondary">
-                  Gabriel Bochi Farina
+                  DEV
                 </Typography>
                 <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
-                  DEV
+                  Gabriel
                 </Typography>
               </Box>
 
