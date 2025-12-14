@@ -12,14 +12,28 @@ import "./styles.css";
 export default function Home({ userEmail, handleLogout }) {
   const [currentPage, setCurrentPage] = useState("home");
 
+  const [filters, setFilters] = useState({
+    search: "",
+    genre: "",
+    platform: "",
+    duration: ""
+  });
+
+  const handleFilterChange = (newFilters) => {
+    setFilters((prev) => ({ ...prev, ...newFilters }));
+  };
+
   const renderMainContent = () => {
     switch (currentPage) {
       case "home":
         return (
           <>
-            <FilterBar />
+            <FilterBar 
+              currentFilters={filters} 
+              onFilterChange={handleFilterChange} 
+            />
             <MagicSection />
-            <GameGrid />
+            <GameGrid filters={filters}/>
           </>
         );
       case "quemSomos":
