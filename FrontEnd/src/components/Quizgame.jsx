@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Typography, Button, Box, Stack, CircularProgress } from '@mui/material';
 import PopUp from './Popup';
+import "./styles.css";
 
 const questionsData = [
   {
@@ -196,11 +197,11 @@ export default function QuizGame() {
   };
 
   const renderContent = () => {
-    if (loading) return <Box p={3} textAlign="center"><CircularProgress /></Box>;
+    if (loading) return <Box className="quiz-loader"><CircularProgress /></Box>;
   
     if (!loading && generos.length === 0) {
       return (
-        <Box p={3} textAlign="center">
+        <Box className="quiz-error">
           <Typography variant="body1" color="error">
             Não foi possível carregar os gêneros do banco de dados.
           </Typography>
@@ -210,20 +211,11 @@ export default function QuizGame() {
 
     if (finished) {
       return (
-        <Box textAlign="center" p={2}>
-          <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold' }}>Resultado</Typography>
+        <Box className="quiz-result-container">
+          <Typography variant="h5" gutterBottom className="quiz-result-title">Resultado</Typography>
           <Typography variant="body1">Sua vibe de hoje combina com:</Typography>
-          <Box 
-            sx={{ 
-                my: 3, 
-                p: 2, 
-                bgcolor: 'primary.light', 
-                color: 'white', 
-                borderRadius: 2,
-                boxShadow: 3
-            }}
-          >
-              <Typography variant="h3" sx={{ fontWeight: 'bold', textTransform: 'uppercase' }}>
+          <Box className="quiz-result-box">
+              <Typography variant="h3" className="quiz-result-genre">
                 {resultGenre}
               </Typography>
           </Box>
@@ -237,14 +229,14 @@ export default function QuizGame() {
     const question = questionsData[currentQuestion];
 
     return (
-      <Box p={1} sx={{ minWidth: '300px' }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
+      <Box className="quiz-question-container">
+        <Stack direction="row" justifyContent="space-between" alignItems="center" className="quiz-question-header">
              <Typography variant="caption" color="textSecondary">
                 PERGUNTA {currentQuestion + 1} / {questionsData.length}
              </Typography>
         </Stack>
         
-        <Typography variant="h6" sx={{ mb: 3, fontWeight: 500 }}>
+        <Typography variant="h6" className="quiz-question-text">
           {question.text}
         </Typography>
         
@@ -255,18 +247,8 @@ export default function QuizGame() {
               variant="outlined" 
               fullWidth 
               size="large"
-            
               onClick={() => handleAnswer(option.keywords)}
-              sx={{ 
-                  justifyContent: "flex-start", 
-                  textAlign: "left",
-                  py: 1.5,
-                  borderColor: 'primary.main',
-                  '&:hover': {
-                      bgcolor: 'primary.50',
-                      borderColor: 'primary.dark'
-                  }
-              }}
+              className="quiz-option-button"
             >
               {option.label}
             </Button>
@@ -278,7 +260,7 @@ export default function QuizGame() {
 
   return (
     <PopUp trigger={
-        <Button variant="contained" color="warning" size="large" sx={{ fontWeight: 'bold' }}>
+        <Button variant="contained" color="warning" size="large" className="quiz-trigger-btn">
             🎲 O que devo jogar hoje?
         </Button>
     }>

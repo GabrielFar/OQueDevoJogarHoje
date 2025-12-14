@@ -35,7 +35,7 @@ export default function Login({ handleLogin }) {
 
   return (
     <div className="login-page">
-      <img src="/Banner.png" alt="Banner O que devo jogar hoje?" className="login-banner" />
+      <img src="../public/Banner.png" alt="Banner O que devo jogar hoje?" className="login-banner" />
 
       <p className="login-subtitle">
         Faça o Login para uma Melhor Experiência!
