@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton, Menu, 
 import MenuIcon from "@mui/icons-material/Menu";
 import bannerImg from "../../public/Banner.png";
 
-export default function Header({ userEmail, handleLogout, onNavigate }) {
+export default function Header({ userEmail, handleLogout, onNavigate, currentPage }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -16,31 +16,47 @@ export default function Header({ userEmail, handleLogout, onNavigate }) {
 
   const handleMenuClick = (item) => {
     handleCloseNavMenu();
-    if (item === "Quem Somos?") {
-      onNavigate("quemSomos");
-    } else if (item === "Jogos" || item === "Home") {
-      onNavigate("home");
-    } else {
-      console.log("Navegar para:", item);
-    }
+    if (item === "Admin") onNavigate("admin");
+    else if (item === "Quem Somos?") onNavigate("quemSomos");
+    else if (item === "Minha Lista") onNavigate("minhaLista");
   };
 
-  const navItems = ["Quem Somos?", "Jogos", "Minha Lista"];
+  const navItems = ["Admin", "Quem Somos?", "Minha Lista"];
 
-  const buttonStyle = {
-    color: 'white',
-    fontWeight: 'bold',
-    display: 'block',
-    px: 2,
-    py: 1,
-    borderRadius: 2,
-    transition: 'all 0.3s ease',
-    '&:hover': {
-      bgcolor: '#ff6f00',
-      color: 'white',
-      transform: 'scale(1.05)',
-      boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
+  const getButtonStyle = (itemName) => {
+    const pageMap = {
+      "Admin": "admin",
+      "Quem Somos?": "quemSomos",
+      "Minha Lista": "minhaLista"
+    };
+
+    const isActive = currentPage === pageMap[itemName];
+
+    if ((itemName === "Minha Lista" || itemName === "Admin") && isActive) {
+      return {
+        bgcolor: '#FF7043',
+        color: 'white',
+        fontWeight: 'bold',
+        px: 3,
+        py: 1,
+        borderRadius: 20,
+        textTransform: 'none',
+        boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
+        '&:hover': { bgcolor: '#F4511E' }
+      };
     }
+
+    return {
+      color: 'white',
+      fontWeight: 'bold',
+      px: 2,
+      py: 1,
+      borderRadius: 2,
+      textTransform: 'none',
+      '&:hover': {
+        bgcolor: 'rgba(255,255,255,0.1)',
+      }
+    };
   };
 
   return (
@@ -52,7 +68,7 @@ export default function Header({ userEmail, handleLogout, onNavigate }) {
             component="img"
             src={bannerImg}
             alt="Banner"
-            onClick={() => onNavigate("home")} 
+            onClick={() => onNavigate("home")}
             sx={{
               maxWidth: { xs: '140px', sm: '200px', md: '350px' },
               height: 'auto',
@@ -67,7 +83,7 @@ export default function Header({ userEmail, handleLogout, onNavigate }) {
               <Button
                 key={item}
                 onClick={() => handleMenuClick(item)}
-                sx={buttonStyle}
+                sx={getButtonStyle(item)}
               >
                 {item}
               </Button>
@@ -116,18 +132,21 @@ export default function Header({ userEmail, handleLogout, onNavigate }) {
               onClose={handleCloseNavMenu}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
-              <Box sx={{ px: 2, py: 1, borderBottom: '1px solid #eee', mb: 1, bgcolor: '#f5f5f5' }}>
-                <Typography variant="caption" color="text.secondary">Logado como:</Typography>
-                <Typography variant="subtitle2" sx={{ fontWeight: 'bold', color: '#9e3a0e' }}>{userEmail}</Typography>
-              </Box>
-
-              {navItems.map((item) => (
+               {navItems.map((item) => (
                 <MenuItem key={item} onClick={() => handleMenuClick(item)}>
-                  <Typography textAlign="center" sx={{ fontWeight: '500' }}>{item}</Typography>
+                  <Typography 
+                      textAlign="center" 
+                      sx={{ 
+                          fontWeight: '500',
+                          color: (item === "Minha Lista" || item === "Admin") && getButtonStyle(item).bgcolor ? '#FF7043' : 'inherit'
+                      }}
+                  >
+                      {item}
+                  </Typography>
                 </MenuItem>
               ))}
-              <MenuItem onClick={handleLogout} sx={{ color: 'error.main', mt: 1, borderTop: '1px solid #eee' }}>
-                <Typography textAlign="center" sx={{ fontWeight: 'bold' }}>Sair</Typography>
+              <MenuItem onClick={handleLogout}>
+                <Typography textAlign="center" color="error">Sair</Typography>
               </MenuItem>
             </Menu>
           </Box>
