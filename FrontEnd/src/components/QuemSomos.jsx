@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { Box, Typography, Container, Grid, Paper } from "@mui/material";
 
 export default function QuemSomos() {
+  const [hoverRhaiane, setHoverRhaiane] = useState(false);
+  const [hoverGabriel, setHoverGabriel] = useState(false);
+
   return (
     <Container maxWidth="lg" className="about-container">
 
@@ -19,7 +23,18 @@ export default function QuemSomos() {
             <Box className="dev-cards-container">
 
               <Box className="dev-card">
-                <Box className="dev-image-placeholder" />
+                <Box 
+                  className="dev-image-placeholder"
+                  onMouseEnter={() => setHoverRhaiane(true)}
+                  onMouseLeave={() => setHoverRhaiane(false)}
+                >
+                  <Box 
+                    component="img" 
+                    src={`/Rhaiane${hoverRhaiane ? 2 : 1}.jpeg`}
+                    alt={'Dev Rhaiane'}
+                    className="game-card-icon"
+                  />
+                </Box>
                 <Typography variant="caption" display="block" color="text.secondary">
                   DEV
                 </Typography>
@@ -29,7 +44,19 @@ export default function QuemSomos() {
               </Box>
 
               <Box className="dev-card">
-                <Box className="dev-image-placeholder" />
+                <Box 
+                  className="dev-image-placeholder"
+                  onMouseEnter={() => setHoverGabriel(true)}
+                  onMouseLeave={() => setHoverGabriel(false)}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <Box 
+                    component="img" 
+                    src={`/Gabriel${hoverGabriel ? 2 : 1}.jpeg`}
+                    alt={'Dev Gabriel'}
+                    className="game-card-icon"
+                  />
+                </Box>
                 <Typography variant="caption" display="block" color="text.secondary">
                   DEV
                 </Typography>
