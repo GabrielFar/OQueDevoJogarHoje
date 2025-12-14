@@ -9,6 +9,17 @@ import "./styles.css";
 
 export default function Home({ userEmail, handleLogout }) {
   const [currentPage, setCurrentPage] = useState("home");
+  
+  const [filters, setFilters] = useState({
+    search: "",
+    genre: "",
+    platform: "",
+    duration: ""
+  });
+
+  const handleFilterChange = (newFilters) => {
+    setFilters((prev) => ({ ...prev, ...newFilters }));
+  };
 
   return (
     <Box className="home-container">
@@ -21,9 +32,12 @@ export default function Home({ userEmail, handleLogout }) {
       <Container maxWidth="lg">
         {currentPage === "home" ? (
           <>
-            <FilterBar />
+            <FilterBar 
+              currentFilters={filters} 
+              onFilterChange={handleFilterChange} 
+            />
             <MagicSection />
-            <GameGrid />
+            <GameGrid filters={filters} />
           </>
         ) : currentPage === "quemSomos" ? (
           <QuemSomos />

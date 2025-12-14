@@ -1,7 +1,7 @@
 const { plataformas } = require("../database");
 
 // Função para obter todos os plataformas
-const obterTodosplataformas = () => {
+const obterTodasPlataformas = () => {
 	return plataformas;
 };
 
@@ -54,7 +54,7 @@ const deletarPlataforma = (plataforma) => {
 };
 
 module.exports = {
-	obterTodosplataformas,
+	obterTodasPlataformas,
 	obterPlataformaPorId,
 	criarPlataforma,
 	atualizarPlataforma,

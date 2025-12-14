@@ -3,7 +3,7 @@ const plataformaRepository = require("../repositories/plataforma_repository");
 // Função para retornar todos os plataformas
 const retornaTodosPlataformas = async (req, res) => {
   try {
-    const plataformas = await plataformaRepository.obterTodosPlataformas();
+    const plataformas = await plataformaRepository.obterTodasPlataformas();
     res.status(200).json({ plataformas: plataformas });
   } catch (error) {
     console.log("Erro ao buscar plataformas:", error);
