@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton, Menu, 
 import MenuIcon from "@mui/icons-material/Menu";
 import bannerImg from "../../public/Banner.png";
 
-export default function Header({ userEmail, handleLogout }) {
+export default function Header({ userEmail, handleLogout, onNavigate }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -14,7 +14,18 @@ export default function Header({ userEmail, handleLogout }) {
     setAnchorElNav(null);
   };
 
-  const navItems = ["Quem Somos?", "Gêneros", "Minha Lista"];
+  const handleMenuClick = (item) => {
+    handleCloseNavMenu();
+    if (item === "Quem Somos?") {
+      onNavigate("quemSomos");
+    } else if (item === "Jogos" || item === "Home") {
+      onNavigate("home");
+    } else {
+      console.log("Navegar para:", item);
+    }
+  };
+
+  const navItems = ["Quem Somos?", "Jogos", "Minha Lista"];
 
   const buttonStyle = {
     color: 'white',
@@ -41,6 +52,7 @@ export default function Header({ userEmail, handleLogout }) {
             component="img"
             src={bannerImg}
             alt="Banner"
+            onClick={() => onNavigate("home")} 
             sx={{
               maxWidth: { xs: '140px', sm: '200px', md: '350px' },
               height: 'auto',
@@ -54,7 +66,7 @@ export default function Header({ userEmail, handleLogout }) {
             {navItems.map((item) => (
               <Button
                 key={item}
-                onClick={handleCloseNavMenu}
+                onClick={() => handleMenuClick(item)}
                 sx={buttonStyle}
               >
                 {item}
@@ -89,8 +101,6 @@ export default function Header({ userEmail, handleLogout }) {
             <IconButton
               size="large"
               aria-label="menu"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
               onClick={handleOpenNavMenu}
               sx={{ color: 'white' }}
             >
@@ -99,20 +109,12 @@ export default function Header({ userEmail, handleLogout }) {
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
+              sx={{ display: { xs: 'block', md: 'none' } }}
             >
               <Box sx={{ px: 2, py: 1, borderBottom: '1px solid #eee', mb: 1, bgcolor: '#f5f5f5' }}>
                 <Typography variant="caption" color="text.secondary">Logado como:</Typography>
@@ -120,7 +122,7 @@ export default function Header({ userEmail, handleLogout }) {
               </Box>
 
               {navItems.map((item) => (
-                <MenuItem key={item} onClick={handleCloseNavMenu}>
+                <MenuItem key={item} onClick={() => handleMenuClick(item)}>
                   <Typography textAlign="center" sx={{ fontWeight: '500' }}>{item}</Typography>
                 </MenuItem>
               ))}
