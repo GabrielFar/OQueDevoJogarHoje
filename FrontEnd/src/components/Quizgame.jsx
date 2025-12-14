@@ -2,197 +2,159 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import { Typography, Button, Box, Stack, CircularProgress } from '@mui/material';
 import PopUp from './Popup';
+import GameCard from './GameCard';
 import "./styles.css";
 
 const questionsData = [
   {
-    text: "O que você prefere usar mais hoje: os reflexos ou a cabeça?", 
+    text: "Quanto tempo livre você tem para se dedicar a um jogo agora?",
+    type: "tempo",
     options: [
-      { label: "Reflexos rápidos (Ação/FPS/Luta)", keywords: ["ação", "fps", "tiro", "luta", "hack", "beat"] }, 
-      { label: "A cabeça / Raciocínio (Estratégia/Puzzle)", keywords: ["estratégia", "puzzle", "quebra-cabeça", "tabuleiro"] }, 
-      { label: "Um pouco dos dois", keywords: ["rpg", "plataforma", "aventura"] },
-      { label: "Nenhum (Quero só relaxar)", keywords: ["simulação", "casual", "puzzle"] } 
+      { label: "Tenho pressa (Partidas rápidas de 15-30min)", value: ["curto"] },
+      { label: "Tenho algumas horas (Sessões médias)", value: ["medio", "curto"] },
+      { label: "Quero uma vida nova (Campanhas de +50 horas)", value: ["longo"] },
+      { label: "Indiferente", value: ["curto", "medio", "longo"] }
     ]
   },
   {
-    text: "Quanto a história importa para você agora?", 
+    text: "Qual a vibe principal que você busca?",
+    type: "keyword",
     options: [
-      { label: "É o principal, quero um filme jogável", keywords: ["aventura", "rpg", "interativo"] }, 
-      { label: "Pouco importa, quero gameplay puro", keywords: ["esporte", "corrida", "luta", "arcade", "fps"] }, 
-      { label: "Tanto faz", keywords: ["ação", "plataforma"] },
-      { label: "Prefiro criar minha própria história", keywords: ["simulação", "sandbox", "estratégia"] } 
+      { label: "Adrenalina e Ação Frenética", keywords: ["ação", "fps", "luta", "hack", "beat", "corrida"] }, 
+      { label: "Pensar, Planejar e Construir", keywords: ["estratégia", "puzzle", "simulação"] }, 
+      { label: "Imersão em História e Fantasia", keywords: ["rpg", "aventura"] },
+      { label: "Relaxar e Descontrair", keywords: ["simulação", "casual", "plataforma"] } 
     ]
   },
   {
-    text: "Qual o clima que você está procurando?", 
+    text: "Sobre a complexidade do jogo:",
+    type: "keyword",
     options: [
-      { label: "Tenso e assustador", keywords: ["horror", "terror", "survival"] }, 
-      { label: "Leve e colorido", keywords: ["plataforma", "simulação", "puzzle", "aventura"] }, 
-      { label: "Tanto faz / Neutro", keywords: ["ação", "rpg", "fps"] },
-      { label: "Sombrio, mas sem sustos", keywords: ["rpg", "souls", "ação"] } 
+      { label: "Gosto de mecânicas complexas (RPGs/Estratégia)", keywords: ["rpg", "estratégia", "simulação"] }, 
+      { label: "Quero pegar o controle e sair jogando (Arcade)", keywords: ["luta", "esporte", "corrida", "plataforma"] }, 
+      { label: "Gosto de tomar sustos ou sentir tensão", keywords: ["horror", "terror", "survival"] }, 
+      { label: "Gosto de desafios mentais", keywords: ["puzzle", "estratégia"] }
     ]
   },
   {
-    text: "Você gosta de gerenciar inventário, atributos e subir de nível?", 
+    text: "Qual cenário te atrai mais visualmente?", 
+    type: "keyword",
     options: [
-      { label: "Amo, quero ver números subindo", keywords: ["rpg"] }, 
-      { label: "Detesto, quero ir direto para a ação", keywords: ["fps", "luta", "corrida", "esporte"] }, 
-      { label: "Depende do jogo", keywords: ["ação", "aventura"] }, 
-      { label: "Não sei / Indiferente", keywords: ["plataforma", "simulação"] }
+      { label: "Futurista / Espacial / Militar", keywords: ["fps", "sci-fi", "estratégia", "tiro"] }, 
+      { label: "Medieval / Mágico / Antigo", keywords: ["rpg", "aventura", "fantasia", "hack"] }, 
+      { label: "Urbano / Realista / Esportes", keywords: ["esporte", "corrida", "simulação", "luta"] }, 
+      { label: "Abstrato / Cartoon / Colorido", keywords: ["plataforma", "puzzle", "casual"] } 
     ]
   },
   {
-    text: "Como você prefere ver o jogo?", 
+    text: "Prefere jogar sozinho ou acompanhado?", 
+    type: "keyword",
     options: [
-      { label: "Pelos olhos do personagem - 1ª Pessoa", keywords: ["fps", "tiro"] }, 
-      { label: "Vendo o personagem de fora - 3ª Pessoa", keywords: ["aventura", "rpg", "ação", "plataforma"] }, 
-      { label: "Tanto faz", keywords: ["ação"] },
-      { label: "Visão de cima / Panorâmica", keywords: ["estratégia", "simulação", "moba"] } 
-    ]
-  },
-  {
-    text: "Você prefere mundos mágicos ou simulação da realidade?", 
-    options: [
-      { label: "Fantasia, Magia e Monstros", keywords: ["rpg", "plataforma", "aventura", "fantasia"] }, 
-      { label: "Realismo, Esportes e Carros", keywords: ["esporte", "corrida", "simulação", "tiro"] }, 
-      { label: "Tanto faz", keywords: ["ação"] },
-      { label: "Ficção Científica", keywords: ["fps", "rpg", "estratégia", "sci-fi"] } 
-    ]
-  },
-  {
-    text: "Você prefere controlar um herói ou comandar tudo?", 
-    options: [
-      { label: "Sou um herói solitário", keywords: ["ação", "rpg", "plataforma", "fps"] }, 
-      { label: "Sou o comandante/prefeito", keywords: ["estratégia", "simulação", "tycoon"] }, 
-      { label: "Tanto faz", keywords: ["aventura"] },
-      { label: "Prefiro controlar um time", keywords: ["esporte", "estratégia", "moba"] } 
-    ]
-  },
-  {
-    text: "Você gosta de explorar mapas labirínticos?", 
-    options: [
-      { label: "Sim, adoro explorar (Metroidvania)", keywords: ["plataforma", "rpg", "aventura", "metroidvania"] }, 
-      { label: "Não, prefiro fases lineares", keywords: ["fps", "luta", "corrida"] }, 
-      { label: "Tanto faz", keywords: ["ação"] },
-      { label: "Odeio ficar perdido", keywords: ["esporte", "luta", "puzzle"] } 
-    ]
-  },
-  {
-    text: "Se tiver briga, como você prefere que seja?", 
-    options: [
-      { label: "Na bala / Tiroteio", keywords: ["fps", "tiro"] }, 
-      { label: "Na mão / Espada / Combos", keywords: ["luta", "ação", "hack", "rpg"] }, 
-      { label: "Por turnos / Estratégico", keywords: ["estratégia", "rpg"] }, 
-      { label: "Prefiro evitar combate", keywords: ["simulação", "puzzle", "corrida", "esporte"] } 
-    ]
-  },
-  {
-    text: "O objetivo final hoje é relaxar ou ter um desafio intenso?", 
-    options: [
-      { label: "Relaxar e construir coisas", keywords: ["simulação", "puzzle"] }, 
-      { label: "Desafio intenso e suar a camisa", keywords: ["rpg", "luta", "fps", "souls"] }, 
-      { label: "Tanto faz", keywords: ["aventura"] },
-      { label: "Quero apenas passar o tempo", keywords: ["puzzle", "plataforma", "casual"] } 
+      { label: "Single Player Focado (História)", keywords: ["rpg", "aventura", "horror", "metroidvania"] }, 
+      { label: "Multiplayer Competitivo (PvP)", keywords: ["fps", "moba", "luta", "esporte", "corrida"] }, 
+      { label: "Para jogar com amigos (Co-op)", keywords: ["simulação", "aventura", "plataforma"] },
+      { label: "Tanto faz", keywords: ["ação"] } 
     ]
   }
 ];
 
 export default function QuizGame({ trigger }) {
   const [generos, setGeneros] = useState([]);
+  const [jogos, setJogos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [scores, setScores] = useState({});
+  const [gameScores, setGameScores] = useState({});
   const [finished, setFinished] = useState(false);
-  const [resultGenre, setResultGenre] = useState(null);
+  const [suggestedGames, setSuggestedGames] = useState([]);
 
   useEffect(() => {
-    const fetchGeneros = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get("http://localhost:3002/generos/todos");
-        setGeneros(response.data.generos || response.data);
+        const [genResponse, gamesResponse] = await Promise.all([
+          axios.get("http://localhost:3002/generos/todos"),
+          axios.get("http://localhost:3002/jogos/todos")
+        ]);
+        
+        setGeneros(genResponse.data.generos || genResponse.data);
+        setJogos(gamesResponse.data.jogos || gamesResponse.data);
       } catch (err) {
-        console.error("Erro ao buscar gêneros:", err);
+        console.error("Erro ao buscar dados:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchGeneros();
+    fetchData();
   }, []);
 
-  const getIdsByKeywords = (keywords) => {
-    if (!generos || generos.length === 0) return [];
-  
-    const matchingGenres = generos.filter(g => {
-        const nomeGenero = g.nome.toLowerCase();
-        return keywords.some(key => nomeGenero.includes(key.toLowerCase()));
+  const initializeScores = () => {
+    const initialScores = {};
+    jogos.forEach(game => {
+      initialScores[game.id] = Math.random(); 
     });
-
-    return matchingGenres.map(g => g.id);
+    return initialScores;
   };
 
-  const handleAnswer = (keywords) => {
-  
-    const matchedIds = getIdsByKeywords(keywords);
-    const newScores = { ...scores };
-  
-    if (matchedIds.length > 0) {
-        matchedIds.forEach(id => {
-          newScores[id] = (newScores[id] || 0) + 1;
-        });
-    }
+  const getGenreIdsByKeywords = (keywords) => {
+    if (!generos || generos.length === 0) return [];
+    return generos
+      .filter(g => keywords.some(key => g.nome.toLowerCase().includes(key.toLowerCase())))
+      .map(g => g.id);
+  };
 
-    setScores(newScores);
+  const handleAnswer = (option) => {
+    let currentScores = Object.keys(gameScores).length === 0 
+        ? initializeScores() 
+        : { ...gameScores };
+
+    const questionType = questionsData[currentQuestion].type;
+
+    jogos.forEach(game => {
+        if (questionType === "tempo") {
+            if (option.value.includes(game.tempo)) {
+                currentScores[game.id] += 3; 
+            }
+        } 
+        else if (questionType === "keyword") {
+            const matchedGenreIds = getGenreIdsByKeywords(option.keywords);
+            if (matchedGenreIds.includes(game.generoId)) {
+                currentScores[game.id] += 2; 
+            }
+        }
+    });
+
+    setGameScores(currentScores);
   
     if (currentQuestion < questionsData.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      calculateResult(newScores);
+      calculateResult(currentScores);
     }
   };
 
   const calculateResult = (finalScores) => {
-  
-    if (!generos || generos.length === 0) {
-        setResultGenre("Nenhum gênero disponível no sistema.");
+    if (!jogos || jogos.length === 0) {
         setFinished(true);
         return;
     }
 
-    let bestId = null;
-    let maxScore = -1;
-  
-    for (const [id, score] of Object.entries(finalScores)) {
-      if (score > maxScore) {
-        maxScore = score;
-        bestId = id;
-      }
-    }
-  
-    if (bestId) {
-      const winnerId = Number(bestId);
-    
-      const found = generos.find(g => g.id === winnerId);
-      
-      if (found) {
-        setResultGenre(found.nome);
-      } else {
-        setResultGenre(generos[0].nome);
-      }
-    } else {
-      const randomGenre = generos[Math.floor(Math.random() * generos.length)];
-      setResultGenre(randomGenre ? randomGenre.nome : "Jogos Diversos");
-    }
-    
+    const rankedGames = jogos.map(game => ({
+      ...game,
+      finalScore: finalScores[game.id] || 0
+    }));
+
+    rankedGames.sort((a, b) => b.finalScore - a.finalScore);
+
+    setSuggestedGames(rankedGames.slice(0, 5));
     setFinished(true);
   };
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
-    setScores({});
+    setGameScores({});
     setFinished(false);
-    setResultGenre(null);
+    setSuggestedGames([]);
   };
 
   const renderContent = () => {
@@ -202,7 +164,7 @@ export default function QuizGame({ trigger }) {
       return (
         <Box className="quiz-error">
           <Typography variant="body1" color="error">
-            Não foi possível carregar os gêneros do banco de dados.
+            Erro ao carregar dados. Verifique a API.
           </Typography>
         </Box>
       )
@@ -211,15 +173,27 @@ export default function QuizGame({ trigger }) {
     if (finished) {
       return (
         <Box className="quiz-result-container">
-          <Typography variant="h5" gutterBottom className="quiz-result-title">Resultado</Typography>
-          <Typography variant="body1">Sua vibe de hoje combina com:</Typography>
-          <Box className="quiz-result-box">
-              <Typography variant="h3" className="quiz-result-genre">
-                {resultGenre}
-              </Typography>
+          <Typography variant="h5" gutterBottom className="quiz-result-title">
+            Seleção Personalizada
+          </Typography>
+          <Typography variant="body1">
+            Combinamos suas respostas de gênero e tempo disponível:
+          </Typography>
+          
+          <Box className="quiz-result-grid" sx={{ mt: 3 }}>
+            {suggestedGames.length > 0 ? (
+              suggestedGames.map((game) => (
+                <Box key={game.id} className="quiz-game-wrapper">
+                  <GameCard jogo={game} />
+                </Box>
+              ))
+            ) : (
+              <Typography variant="body2">Nenhum jogo encontrado.</Typography>
+            )}
           </Box>
-          <Button variant="contained" color="secondary" onClick={resetQuiz} fullWidth>
-            Jogar Novamente
+
+          <Button variant="contained" color="secondary" onClick={resetQuiz} fullWidth sx={{ mt: 3 }}>
+            Refazer Quiz
           </Button>
         </Box>
       );
@@ -246,7 +220,7 @@ export default function QuizGame({ trigger }) {
               variant="outlined" 
               fullWidth 
               size="large"
-              onClick={() => handleAnswer(option.keywords)}
+              onClick={() => handleAnswer(option)}
               className="quiz-option-button"
             >
               {option.label}

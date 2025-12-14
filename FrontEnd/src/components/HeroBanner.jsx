@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import bannerImg from "../../public/Banner.png"; 
+import bannerImg from "/Banner.png"; 
 import "./styles.css";
 
 export default function HeroBanner() {

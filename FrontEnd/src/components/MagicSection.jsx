@@ -10,7 +10,7 @@ export default function MagicSection() {
         color="primary" 
         className="magic-title-large"
       >
-        JOGO DO DIA!
+        NÃO SABE O QUE JOGAR?
       </Typography>
 
       <QuizGame 

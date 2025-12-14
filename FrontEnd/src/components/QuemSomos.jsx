@@ -1,73 +1,66 @@
+import { useState } from "react";
 import { Box, Typography, Container, Grid, Paper } from "@mui/material";
 
 export default function QuemSomos() {
-  return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 8 }}>
+  const [hoverRhaiane, setHoverRhaiane] = useState(false);
+  const [hoverGabriel, setHoverGabriel] = useState(false);
 
-      <Box sx={{ display: 'flex', mb: -2.5, position: 'relative', zIndex: 1 }}>
-        <Box 
-          sx={{ 
-            bgcolor: '#FF7043', 
-            borderRadius: 20, 
-            px: 4, 
-            py: 1.5, 
-            color: 'white',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
-          }}
-        >
-          <Typography variant="h5" sx={{ fontWeight: 'bold', textTransform: 'none' }}>
+  return (
+    <Container maxWidth="lg" className="about-container">
+
+      <Box className="about-title-wrapper">
+        <Box className="about-title-pill">
+          <Typography variant="h5" className="about-title-text">
             Quem Somos?
           </Typography>
         </Box>
       </Box>
 
-      <Paper 
-        elevation={0} 
-        sx={{ 
-          p: { xs: 4, md: 8 }, 
-          pt: { xs: 6, md: 8 },
-          borderRadius: 8, 
-          bgcolor: '#F5F5F5',
-          minHeight: '400px'
-        }}
-      >
+      <Paper elevation={0} className="about-paper">
         <Grid container spacing={6} alignItems="center">
 
           <Grid item xs={12} md={5}>
-            <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
+            <Box className="dev-cards-container">
 
-              <Box sx={{ textAlign: 'center', width: 150 }}>
+              <Box className="dev-card">
                 <Box 
-                  sx={{ 
-                    width: '100%', 
-                    height: 150, 
-                    bgcolor: '#cfcfcf',
-                    borderRadius: 4, 
-                    mb: 1.5
-                  }} 
-                />
+                  className="dev-image-placeholder"
+                  onMouseEnter={() => setHoverRhaiane(true)}
+                  onMouseLeave={() => setHoverRhaiane(false)}
+                >
+                  <Box 
+                    component="img" 
+                    src={`/Rhaiane${hoverRhaiane ? 2 : 1}.jpeg`}
+                    alt={'Dev Rhaiane'}
+                    className="game-card-icon"
+                  />
+                </Box>
                 <Typography variant="caption" display="block" color="text.secondary">
                   DEV
                 </Typography>
-                <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
+                <Typography variant="h6" className="dev-name">
                   Rhaiane
                 </Typography>
               </Box>
 
-              <Box sx={{ textAlign: 'center', width: 150 }}>
+              <Box className="dev-card">
                 <Box 
-                  sx={{ 
-                    width: '100%', 
-                    height: 150, 
-                    bgcolor: '#cfcfcf',
-                    borderRadius: 4, 
-                    mb: 1.5
-                  }} 
-                />
+                  className="dev-image-placeholder"
+                  onMouseEnter={() => setHoverGabriel(true)}
+                  onMouseLeave={() => setHoverGabriel(false)}
+                  sx={{ cursor: 'pointer' }}
+                >
+                  <Box 
+                    component="img" 
+                    src={`/Gabriel${hoverGabriel ? 2 : 1}.jpeg`}
+                    alt={'Dev Gabriel'}
+                    className="game-card-icon"
+                  />
+                </Box>
                 <Typography variant="caption" display="block" color="text.secondary">
                   DEV
                 </Typography>
-                <Typography variant="h6" sx={{ fontWeight: '900', textTransform: 'uppercase' }}>
+                <Typography variant="h6" className="dev-name">
                   Gabriel
                 </Typography>
               </Box>
@@ -76,27 +69,11 @@ export default function QuemSomos() {
           </Grid>
 
           <Grid item xs={12} md={7}>
-            <Typography 
-              variant="h4" 
-              sx={{ 
-                fontWeight: 'bold', 
-                mb: 3, 
-                fontFamily: 'sans-serif', //gab, vou trocar pela fonte Condensed talvez depois
-                color: 'black'
-              }}
-            >
+            <Typography variant="h4" className="objective-title">
               Nosso Objetivo:
             </Typography>
             
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                lineHeight: 1.6, 
-                fontSize: '1.1rem',
-                color: '#333',
-                textAlign: 'justify'
-              }}
-            >
+            <Typography variant="body1" className="objective-text">
               Sabemos que as vezes as pessoas estão ocupadas e cansadas e apenas querem encontrar algo que possa anima-las e diverti-las em um momento aborrecente, e que geralmente, nesse momentos, procurar algo para se divertir, torna-se uma tarefa árdua, tediosa e que leva tempo. Por isso criamos esse projeto, nosso objetivo é facilitar a busca para você, de forma que seja menos entediante e que leva menos tempo para você dar um 'Play', assim, podendo passar mais tempo com jogos que vão te agradar, em vez de buscar por horas algo que você nem sabe se é bom.
             </Typography>
           </Grid>

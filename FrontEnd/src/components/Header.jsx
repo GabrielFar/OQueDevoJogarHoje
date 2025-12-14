@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton, Menu, MenuItem } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import bannerImg from "../../public/Banner.png";
+import bannerImg from "/Banner.png";
 import "./styles.css";
 
 export default function Header({ userEmail, handleLogout, onNavigate, currentPage }) {
