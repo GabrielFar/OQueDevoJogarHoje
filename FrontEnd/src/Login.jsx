@@ -67,7 +67,7 @@ export default function Login({ handleLogin }) {
               onChange={(e) => setPassword(e.target.value)}
               disabled={isLoading}
               onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key == 'Enter') {
                       handleSubmit();
                   }
               }}

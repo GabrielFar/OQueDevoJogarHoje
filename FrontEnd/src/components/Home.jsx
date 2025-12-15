@@ -8,8 +8,8 @@ import QuemSomos from "../components/QuemSomos";
 import AdminPanel from "../components/AdminPanel";
 import "./styles.css";
 
-export default function Home({ userEmail, handleLogout }) {
-  const [currentPage, setCurrentPage] = useState("home");
+export default function Home({ userEmail, handleLogout, isAdmin }) {
+  const [currentPage, setCurrentPage] = useState(isAdmin ? "admin" : "home");
 
   const [filters, setFilters] = useState({
     search: "",
@@ -38,7 +38,7 @@ export default function Home({ userEmail, handleLogout }) {
       case "quemSomos":
         return <QuemSomos />;
       case "admin":
-        return <AdminPanel />;
+        return isAdmin ? <AdminPanel /> : null;
       default:
         return null;
     }
@@ -51,6 +51,7 @@ export default function Home({ userEmail, handleLogout }) {
         handleLogout={handleLogout} 
         onNavigate={setCurrentPage}
         currentPage={currentPage}
+        isAdmin={isAdmin}
       />
 
       <Container maxWidth="lg">

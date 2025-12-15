@@ -609,6 +609,7 @@
   align-items: center;
   margin-bottom: 16px;
   gap: 16px;
+  width: 100%;
 }
 
 .admin-label-chip {
@@ -628,6 +629,7 @@
 
 .admin-input-field {
   flex-grow: 1;
+  width: 100%;
 }
 
 .admin-input-field .MuiOutlinedInput-root {
@@ -649,9 +651,10 @@
 .admin-actions-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: flex-start;
   height: 100%;
+  padding-left: 24px;
 }
 
 .admin-controller-img {
@@ -664,11 +667,12 @@
 .admin-action-btn {
   width: 100%;
   border-radius: 20px !important;
-  padding: 10px 0 !important;
+  padding: 10px 10px !important;
   margin-bottom: 12px !important;
   font-weight: bold !important;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16) !important;
-  font-size: 1rem !important;
+  font-size: 0.85rem !important;
+  white-space: nowrap;
 }
 
 .btn-create {
@@ -732,4 +736,13 @@
 
 .admin-table-row-selected {
   background-color: #FFAB91 !important;
+}
+
+.admin-grid-container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.admin-form-container{
+  flex: 1;
 }

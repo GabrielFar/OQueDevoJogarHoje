@@ -16,7 +16,7 @@ const configureLocalStrategy = () => {
       async (username, password, done) => {
         console.log("Tentativa de login:", username, password);
         try {
-          const user = db.usuarios.find((u) => u.email === username);
+          const user = db.usuarios.find((u) => u.email == username);
 
           if (!user) {
             return done(null, false, { message: "Usuário incorreto." });
@@ -26,7 +26,7 @@ const configureLocalStrategy = () => {
           if (user.senha.startsWith("$2")) {
             passwordMatch = await bcrypt.compare(password, user.senha);
           } else {
-            passwordMatch = (password === user.senha);
+            passwordMatch = (password == user.senha);
           }
 
           if (passwordMatch) {
@@ -51,7 +51,7 @@ const configureJwtStrategy = () => {
       },
       async (payload, done) => {
         try {
-          const user = db.usuarios.find((u) => u.email === payload.username);
+          const user = db.usuarios.find((u) => u.email == payload.username);
 
           if (user) {
             done(null, user);
@@ -92,12 +92,12 @@ const gerarToken = (username) => {
 const requireJWTAuth = passport.authenticate("jwt", { session: false });
 
 const verificarPermissaoPorDescricao = (email, descricaoPermissao) => {
-  const permissao = db.permissoes.find((p) => p.descricao === descricaoPermissao);
+  const permissao = db.permissoes.find((p) => p.descricao == descricaoPermissao);
 
   if (!permissao) return false;
 
   const temPermissao = db.usuario_permissao.find(
-    (up) => up.email === email && up.id_permissao === permissao.id
+    (up) => up.email == email && up.id_permissao == permissao.id
   );
 
   return !!temPermissao;

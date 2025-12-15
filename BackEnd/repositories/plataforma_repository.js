@@ -7,19 +7,25 @@ const obterTodasPlataformas = () => {
 
 // Função para obter plataforma por ID
 const obterPlataformaPorId = (id) => {
-	const result = plataformas.find(plataforma => plataforma.id === id);
+	const result = plataformas.find(plataforma => plataforma.id == id);
 	return result || null;
 };
 
 // Função para criar um novo plataforma
 const criarPlataforma = (plataforma) => {
+	const plataformaExistente = obterPlataformaPorId(plataforma.id);
+	
+	if (plataformaExistente) {
+		return null;
+	}
+
 	plataformas.push(plataforma);
 	return plataforma;
 };
 
 // Função para atualizar um plataforma
 const atualizarPlataforma = (plataforma) => {
-	const plataformaExistente = plataformas.find(p => p.id === plataforma.id);
+	const plataformaExistente = plataformas.find(p => p.id == plataforma.id);
 	if (!plataformaExistente) {
 		return null;
 	}
@@ -29,12 +35,13 @@ const atualizarPlataforma = (plataforma) => {
 
 // Função para deletar um plataforma
 const deletarPlataforma = (plataforma) => {
-	const index = plataformas.findIndex(p => p.id === plataforma.id);
-	if (index === -1) {
-		return false;
+	const index = plataformas.findIndex(p => p.id == plataforma.id);
+	if (index == -1) {
+		return null;
 	}
+	const retornarPlataforma = plataformas[index];
 	plataformas.splice(index, 1);
-	return true;
+	return retornarPlataforma;
 };
 
 module.exports = {

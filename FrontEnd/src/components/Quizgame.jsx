@@ -10,10 +10,10 @@ const questionsData = [
     text: "Quanto tempo livre você tem para se dedicar a um jogo agora?",
     type: "tempo",
     options: [
-      { label: "Tenho pressa (Partidas rápidas de 15-30min)", value: ["curto"] },
-      { label: "Tenho algumas horas (Sessões médias)", value: ["medio", "curto"] },
-      { label: "Quero uma vida nova (Campanhas de +50 horas)", value: ["longo"] },
-      { label: "Indiferente", value: ["curto", "medio", "longo"] }
+      { label: "Tenho pressa (Partidas rápidas de 15-30min)", value: ["Curto"] },
+      { label: "Tenho algumas horas (Sessões médias)", value: ["Médio", "Curto"] },
+      { label: "Quero uma vida nova (Campanhas de +50 horas)", value: ["Longo"] },
+      { label: "Indiferente", value: ["Curto", "Médio", "Longo"] }
     ]
   },
   {
@@ -22,7 +22,7 @@ const questionsData = [
     options: [
       { label: "Adrenalina e Ação Frenética", keywords: ["ação", "fps", "luta", "hack", "beat", "corrida"] }, 
       { label: "Pensar, Planejar e Construir", keywords: ["estratégia", "puzzle", "simulação"] }, 
-      { label: "Imersão em História e Fantasia", keywords: ["rpg", "aventura"] },
+      { label: "Imersão em História e Fantasia", keywords: ["rpg", "aventura", "indie"] },
       { label: "Relaxar e Descontrair", keywords: ["simulação", "casual", "plataforma"] } 
     ]
   },
@@ -30,7 +30,7 @@ const questionsData = [
     text: "Sobre a complexidade do jogo:",
     type: "keyword",
     options: [
-      { label: "Gosto de mecânicas complexas (RPGs/Estratégia)", keywords: ["rpg", "estratégia", "simulação"] }, 
+      { label: "Gosto de mecânicas complexas (RPGs/Estratégia)", keywords: ["rpg", "estratégia", "simulação", "indie"] }, 
       { label: "Quero pegar o controle e sair jogando (Arcade)", keywords: ["luta", "esporte", "corrida", "plataforma"] }, 
       { label: "Gosto de tomar sustos ou sentir tensão", keywords: ["horror", "terror", "survival"] }, 
       { label: "Gosto de desafios mentais", keywords: ["puzzle", "estratégia"] }
@@ -41,7 +41,7 @@ const questionsData = [
     type: "keyword",
     options: [
       { label: "Futurista / Espacial / Militar", keywords: ["fps", "sci-fi", "estratégia", "tiro"] }, 
-      { label: "Medieval / Mágico / Antigo", keywords: ["rpg", "aventura", "fantasia", "hack"] }, 
+      { label: "Medieval / Mágico / Antigo", keywords: ["rpg", "aventura", "fantasia", "hack", "indie"] }, 
       { label: "Urbano / Realista / Esportes", keywords: ["esporte", "corrida", "simulação", "luta"] }, 
       { label: "Abstrato / Cartoon / Colorido", keywords: ["plataforma", "puzzle", "casual"] } 
     ]
@@ -50,7 +50,7 @@ const questionsData = [
     text: "Prefere jogar sozinho ou acompanhado?", 
     type: "keyword",
     options: [
-      { label: "Single Player Focado (História)", keywords: ["rpg", "aventura", "horror", "metroidvania"] }, 
+      { label: "Single Player Focado (História)", keywords: ["rpg", "aventura", "horror", "metroidvania", "indie"] }, 
       { label: "Multiplayer Competitivo (PvP)", keywords: ["fps", "moba", "luta", "esporte", "corrida"] }, 
       { label: "Para jogar com amigos (Co-op)", keywords: ["simulação", "aventura", "plataforma"] },
       { label: "Tanto faz", keywords: ["ação"] } 
@@ -97,26 +97,26 @@ export default function QuizGame({ trigger }) {
   };
 
   const getGenreIdsByKeywords = (keywords) => {
-    if (!generos || generos.length === 0) return [];
+    if (!generos || generos.length == 0) return [];
     return generos
       .filter(g => keywords.some(key => g.nome.toLowerCase().includes(key.toLowerCase())))
       .map(g => g.id);
   };
 
   const handleAnswer = (option) => {
-    let currentScores = Object.keys(gameScores).length === 0 
+    let currentScores = Object.keys(gameScores).length == 0 
         ? initializeScores() 
         : { ...gameScores };
 
     const questionType = questionsData[currentQuestion].type;
 
     jogos.forEach(game => {
-        if (questionType === "tempo") {
+        if (questionType == "tempo") {
             if (option.value.includes(game.tempo)) {
                 currentScores[game.id] += 3; 
             }
         } 
-        else if (questionType === "keyword") {
+        else if (questionType == "keyword") {
             const matchedGenreIds = getGenreIdsByKeywords(option.keywords);
             if (matchedGenreIds.includes(game.generoId)) {
                 currentScores[game.id] += 2; 
@@ -134,7 +134,7 @@ export default function QuizGame({ trigger }) {
   };
 
   const calculateResult = (finalScores) => {
-    if (!jogos || jogos.length === 0) {
+    if (!jogos || jogos.length == 0) {
         setFinished(true);
         return;
     }
@@ -160,7 +160,7 @@ export default function QuizGame({ trigger }) {
   const renderContent = () => {
     if (loading) return <Box className="quiz-loader"><CircularProgress /></Box>;
   
-    if (!loading && generos.length === 0) {
+    if (!loading && generos.length == 0) {
       return (
         <Box className="quiz-error">
           <Typography variant="body1" color="error">

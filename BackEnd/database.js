@@ -6,7 +6,7 @@ let jogos = [
         nome: "God of War Ragnarök",
         generoId: 1,
         plataformasId: [2, 3, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2322010/library_600x900.jpg"
     },
     {
@@ -14,7 +14,7 @@ let jogos = [
         nome: "The Last of Us Part I",
         generoId: 1,
         plataformasId: [3, 1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1888930/library_600x900.jpg"
     },
     {
@@ -22,7 +22,7 @@ let jogos = [
         nome: "Red Dead Redemption 2",
         generoId: 1,
         plataformasId: [2, 3, 4, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1174180/library_600x900.jpg"
     },
     {
@@ -30,7 +30,7 @@ let jogos = [
         nome: "GTA V",
         generoId: 1,
         plataformasId: [2, 3, 4, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/271590/library_600x900.jpg"
     },
     {
@@ -38,7 +38,7 @@ let jogos = [
         nome: "Uncharted: Legacy of Thieves",
         generoId: 1,
         plataformasId: [2, 3, 1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1659420/library_600x900.jpg"
     },
 
@@ -49,7 +49,7 @@ let jogos = [
         nome: "The Witcher 3",
         generoId: 2,
         plataformasId: [2, 3, 4, 1, 5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/292030/library_600x900.jpg"
     },
     {
@@ -57,7 +57,7 @@ let jogos = [
         nome: "Elden Ring",
         generoId: 2,
         plataformasId: [2, 3, 4, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1245620/library_600x900.jpg"
     },
     {
@@ -65,7 +65,7 @@ let jogos = [
         nome: "Baldur's Gate 3",
         generoId: 2,
         plataformasId: [3, 4, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1086940/library_600x900.jpg"
     },
     {
@@ -73,7 +73,7 @@ let jogos = [
         nome: "Cyberpunk 2077",
         generoId: 2,
         plataformasId: [2, 3, 4, 1],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1091500/library_600x900.jpg"
     },
     {
@@ -81,7 +81,7 @@ let jogos = [
         nome: "Skyrim Special Edition",
         generoId: 2,
         plataformasId: [2, 3, 4, 1, 5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/489830/library_600x900.jpg"
     },
 
@@ -92,7 +92,7 @@ let jogos = [
         nome: "Doom Eternal",
         generoId: 3,
         plataformasId: [2, 3, 4, 1, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/782330/library_600x900.jpg"
     },
     {
@@ -100,7 +100,7 @@ let jogos = [
         nome: "Valorant",
         generoId: 3,
         plataformasId: [1],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "/valorant.jpg"
     },
     {
@@ -108,7 +108,7 @@ let jogos = [
         nome: "Call of Duty: MW3",
         generoId: 3,
         plataformasId: [2, 3, 4, 1],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2519060/library_600x900.jpg"
     },
     {
@@ -116,7 +116,7 @@ let jogos = [
         nome: "Overwatch 2",
         generoId: 3,
         plataformasId: [2, 3, 4, 1, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2357570/library_600x900.jpg"
     },
     {
@@ -124,7 +124,7 @@ let jogos = [
         nome: "Counter-Strike 2",
         generoId: 3,
         plataformasId: [1],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/library_600x900.jpg"
     },
 
@@ -135,7 +135,7 @@ let jogos = [
         nome: "Resident Evil 4 Remake",
         generoId: 4,
         plataformasId: [2, 3, 4, 1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2050650/library_600x900.jpg"
     },
     {
@@ -143,7 +143,7 @@ let jogos = [
         nome: "Silent Hill 2 Remake",
         generoId: 4,
         plataformasId: [3, 1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2124490/library_600x900.jpg"
     },
     {
@@ -151,7 +151,7 @@ let jogos = [
         nome: "Phasmophobia",
         generoId: 4,
         plataformasId: [1, 3, 4],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/739630/library_600x900.jpg"
     },
     {
@@ -159,7 +159,7 @@ let jogos = [
         nome: "Dead Space Remake",
         generoId: 4,
         plataformasId: [3, 4, 1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1693980/library_600x900.jpg"
     },
     {
@@ -167,7 +167,7 @@ let jogos = [
         nome: "Alien: Isolation",
         generoId: 4,
         plataformasId: [2, 3, 4, 1, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/214490/library_600x900.jpg"
     },
 
@@ -178,7 +178,7 @@ let jogos = [
         nome: "Civilization VI",
         generoId: 5,
         plataformasId: [1, 2, 4, 5, 6],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/289070/library_600x900.jpg"
     },
     {
@@ -186,7 +186,7 @@ let jogos = [
         nome: "League of Legends",
         generoId: 5,
         plataformasId: [1],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "/league_of_legends.jpg"
     },
     {
@@ -194,7 +194,7 @@ let jogos = [
         nome: "Age of Empires IV",
         generoId: 5,
         plataformasId: [1, 4],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1466860/library_600x900.jpg"
     },
     {
@@ -202,7 +202,7 @@ let jogos = [
         nome: "XCOM 2",
         generoId: 5,
         plataformasId: [1, 2, 4, 5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/268500/library_600x900.jpg"
     },
     {
@@ -210,7 +210,7 @@ let jogos = [
         nome: "Teamfight Tactics",
         generoId: 5,
         plataformasId: [1, 6],
-        tempo: "curto",
+        tempo: "Curto",
         imagem:"/teamfight_tactics.jpg"
     },
 
@@ -221,7 +221,7 @@ let jogos = [
         nome: "The Sims 4",
         generoId: 6,
         plataformasId: [1, 2, 3, 4],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1222670/library_600x900.jpg"
     },
     {
@@ -229,7 +229,7 @@ let jogos = [
         nome: "Stardew Valley",
         generoId: 6,
         plataformasId: [1, 2, 4, 5, 6],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/413150/library_600x900.jpg"
     },
     {
@@ -237,7 +237,7 @@ let jogos = [
         nome: "Cities: Skylines",
         generoId: 6,
         plataformasId: [1, 2, 3, 4, 5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/255710/library_600x900.jpg"
     },
     {
@@ -245,7 +245,7 @@ let jogos = [
         nome: "Euro Truck Simulator 2",
         generoId: 6,
         plataformasId: [1],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/227300/library_600x900.jpg"
     },
     {
@@ -253,7 +253,7 @@ let jogos = [
         nome: "Animal Crossing: New Horizons",
         generoId: 6,
         plataformasId: [5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "/animal_crossing_new_horizons.jpg"
     },
 
@@ -264,7 +264,7 @@ let jogos = [
         nome: "EA Sports FC 24",
         generoId: 7,
         plataformasId: [1, 2, 3, 4, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2195250/library_600x900.jpg"
     },
     {
@@ -272,7 +272,7 @@ let jogos = [
         nome: "Forza Horizon 5",
         generoId: 7,
         plataformasId: [1, 4],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1551360/library_600x900.jpg"
     },
     {
@@ -280,7 +280,7 @@ let jogos = [
         nome: "Mario Kart 8 Deluxe",
         generoId: 7,
         plataformasId: [5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "/mario_kart_8_deluxe.jpg"
     },
     {
@@ -288,7 +288,7 @@ let jogos = [
         nome: "Rocket League",
         generoId: 7,
         plataformasId: [1, 2, 3, 4, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252950/library_600x900.jpg"
     },
     {
@@ -296,7 +296,7 @@ let jogos = [
         nome: "Gran Turismo 7",
         generoId: 7,
         plataformasId: [2, 3],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "/gran_turismo_7.jpg"
     },
 
@@ -307,7 +307,7 @@ let jogos = [
         nome: "Street Fighter 6",
         generoId: 8,
         plataformasId: [1, 2, 3, 4],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1364780/library_600x900.jpg"
     },
     {
@@ -315,7 +315,7 @@ let jogos = [
         nome: "Mortal Kombat 1",
         generoId: 8,
         plataformasId: [1, 3, 4, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1971870/library_600x900.jpg"
     },
     {
@@ -323,7 +323,7 @@ let jogos = [
         nome: "Tekken 8",
         generoId: 8,
         plataformasId: [1, 3, 4],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1778820/library_600x900.jpg"
     },
     {
@@ -331,7 +331,7 @@ let jogos = [
         nome: "Super Smash Bros. Ultimate",
         generoId: 8,
         plataformasId: [5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "/super_smash_bros_ultimate.jpg"
     },
     {
@@ -339,7 +339,7 @@ let jogos = [
         nome: "Dragon Ball FighterZ",
         generoId: 8,
         plataformasId: [1, 2, 4, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/678950/library_600x900.jpg"
     },
 
@@ -350,7 +350,7 @@ let jogos = [
         nome: "Portal 2",
         generoId: 9,
         plataformasId: [1, 4, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/620/library_600x900.jpg"
     },
     {
@@ -358,7 +358,7 @@ let jogos = [
         nome: "Tetris Effect: Connected",
         generoId: 9,
         plataformasId: [1, 2, 4, 5],
-        tempo: "curto",
+        tempo: "Curto",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1003590/library_600x900.jpg"
     },
     {
@@ -366,7 +366,7 @@ let jogos = [
         nome: "It Takes Two",
         generoId: 9,
         plataformasId: [1, 2, 3, 4, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1426210/library_600x900.jpg"
     },
     {
@@ -374,7 +374,7 @@ let jogos = [
         nome: "The Witness",
         generoId: 9,
         plataformasId: [1, 2, 4, 6],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/210970/library_600x900.jpg"
     },
     {
@@ -382,7 +382,7 @@ let jogos = [
         nome: "Baba Is You",
         generoId: 9,
         plataformasId: [1, 5, 6],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/736260/library_600x900.jpg"
     },
 
@@ -393,7 +393,7 @@ let jogos = [
         nome: "Hollow Knight",
         generoId: 10,
         plataformasId: [1, 2, 4, 5],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/367520/library_600x900.jpg"
     },
     {
@@ -401,7 +401,7 @@ let jogos = [
         nome: "Ori and the Will of the Wisps",
         generoId: 10,
         plataformasId: [1, 4, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1057090/library_600x900.jpg"
     },
     {
@@ -409,7 +409,7 @@ let jogos = [
         nome: "Celeste",
         generoId: 10,
         plataformasId: [1, 2, 4, 5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/504230/library_600x900.jpg"
     },
     {
@@ -417,7 +417,7 @@ let jogos = [
         nome: "Super Mario Odyssey",
         generoId: 10,
         plataformasId: [5],
-        tempo: "medio",
+        tempo: "Médio",
         imagem: "/super_mario_odyssey.jpg"
     },
     {
@@ -425,7 +425,7 @@ let jogos = [
         nome: "Dead Cells",
         generoId: 10,
         plataformasId: [1, 2, 4, 5, 6],
-        tempo: "longo",
+        tempo: "Longo",
         imagem: "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/588650/library_600x900.jpg"
     }
 ];

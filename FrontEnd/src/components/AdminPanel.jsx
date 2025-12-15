@@ -71,7 +71,7 @@ export default function AdminPanel() {
   };
 
   const handleSelectRow = (item) => {
-    if (tabValue === 0) {
+    if (tabValue == 0) {
       setFormData({
         id: item.id,
         nome: item.nome,
@@ -89,15 +89,15 @@ export default function AdminPanel() {
   };
 
   const getEndpoint = () => {
-    if (tabValue === 0) return "jogos";
-    if (tabValue === 1) return "generos";
+    if (tabValue == 0) return "jogos";
+    if (tabValue == 1) return "generos";
     return "plataformas";
   };
 
   const getCreatePayload = () => {
     const basePayload = { id: formData.id, nome: formData.nome };
     
-    if (tabValue === 0) {
+    if (tabValue == 0) {
       return {
         ...basePayload,
         generoId: Number(formData.generoId),
@@ -110,6 +110,7 @@ export default function AdminPanel() {
   };
 
   const handleCreate = async () => {
+    setLoading(true);
     const endpoint = getEndpoint();
     const payload = getCreatePayload();
 
@@ -119,28 +120,36 @@ export default function AdminPanel() {
       if (response.data) {
         await fetchAllData();
         resetForm();
+      } else {
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
-      alert("Erro ao criar registro. Verifique o console.");
+      alert(err.response?.data?.message || "Erro ao criar registro. Verifique o console.");
+      setLoading(false);
     }
   };
 
   const handleEdit = async () => {
     if (!formData.id) return alert("Selecione um item na tabela para editar.");
     
+    setLoading(true);
+
     const endpoint = getEndpoint();
     
     let originalItem = null;
-    if (tabValue === 0) originalItem = jogos.find(j => j.id == formData.id);
-    else if (tabValue === 1) originalItem = generos.find(g => g.id == formData.id);
+    if (tabValue == 0) originalItem = jogos.find(j => j.id == formData.id);
+    else if (tabValue == 1) originalItem = generos.find(g => g.id == formData.id);
     else originalItem = plataformas.find(p => p.id == formData.id);
 
-    if (!originalItem) return;
+    if (!originalItem) {
+        setLoading(false);
+        return;
+    }
 
     let payload = {};
 
-    if (tabValue === 0) {
+    if (tabValue == 0) {
       payload = {
         id: formData.id !== "" ? formData.id : originalItem.id,
         nome: formData.nome !== "" ? formData.nome : originalItem.nome,
@@ -164,27 +173,35 @@ export default function AdminPanel() {
       if (response.data) {
         await fetchAllData();
         resetForm();
+      } else {
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
-      alert("Erro ao editar registro. Verifique o console.");
+      alert(err.response?.data?.message || "Erro ao editar registro. Verifique o console.");
+      setLoading(false);
     }
   };
 
   const handleDelete = async () => {
     if (!formData.id) return alert("Selecione um item na tabela para excluir.");
+    
+    setLoading(true);
     const endpoint = getEndpoint();
 
     try {
       const response = await axios.delete(`${API_URL}/${endpoint}/${formData.id}`);
       
-      if (response.status === 200 || response.data) {
+      if (response.status == 200 || response.data) {
         await fetchAllData();
         resetForm();
+      } else {
+        setLoading(false);
       }
     } catch (err) {
       console.error(err);
-      alert("Erro ao excluir registro. Verifique o console.");
+      alert(err.response?.data?.message || "Erro ao excluir registro. Verifique o console.");
+      setLoading(false);
     }
   };
 
@@ -195,6 +212,7 @@ export default function AdminPanel() {
           <div className="admin-label-chip">ID</div>
           <TextField
             name="id"
+            fullWidth
             variant="outlined" 
             size="small" 
             value={formData.id} 
@@ -208,20 +226,21 @@ export default function AdminPanel() {
           <div className="admin-label-chip">NOME</div>
           <TextField 
             name="nome"
+            fullWidth
             variant="outlined" 
             size="small" 
             value={formData.nome} 
             onChange={handleInputChange}
             className="admin-input-field"
-            placeholder={tabValue === 0 ? "Nome do Jogo" : "Nome"}
+            placeholder={tabValue == 0 ? "Nome do Jogo" : "Nome"}
           />
         </div>
 
-        {tabValue === 0 && (
+        {tabValue == 0 && (
           <>
             <div className="admin-form-row">
               <div className="admin-label-chip">DURAÇÃO</div>
-              <FormControl size="small" className="admin-input-field">
+              <FormControl size="small" fullWidth className="admin-input-field">
                 <Select
                   name="tempo"
                   value={formData.tempo}
@@ -229,16 +248,16 @@ export default function AdminPanel() {
                   displayEmpty
                 >
                   <MenuItem value="" disabled>Selecione a duração</MenuItem>
-                  <MenuItem value="curto">Curto</MenuItem>
-                  <MenuItem value="medio">Médio</MenuItem>
-                  <MenuItem value="longo">Longo</MenuItem>
+                  <MenuItem value="Curto">Curto</MenuItem>
+                  <MenuItem value="Médio">Médio</MenuItem>
+                  <MenuItem value="Longo">Longo</MenuItem>
                 </Select>
               </FormControl>
             </div>
 
             <div className="admin-form-row">
               <div className="admin-label-chip">GÊNERO</div>
-              <FormControl size="small" className="admin-input-field">
+              <FormControl size="small" fullWidth className="admin-input-field">
                 <Select
                   name="generoId"
                   value={formData.generoId}
@@ -254,16 +273,16 @@ export default function AdminPanel() {
             </div>
 
             <div className="admin-form-row">
-              <div className="admin-label-chip">PLATAFORMA</div>
-              <FormControl size="small" className="admin-input-field">
+              <div className="admin-label-chip">PLATAFORMAS</div>
+              <FormControl size="small" fullWidth className="admin-input-field">
                 <Select
                   name="plataformasId"
                   multiple
                   value={formData.plataformasId}
                   onChange={handleInputChange}
                   renderValue={(selected) => {
-                    if (selected.length === 0) return <em>Selecione...</em>;
-                    return selected.map(id => plataformas.find(p => p.id === id)?.nome).join(', ');
+                    if (selected.length == 0) return <em>Selecione...</em>;
+                    return selected.map(id => plataformas.find(p => p.id == id)?.nome).join(', ');
                   }}
                 >
                   {plataformas.map(p => (
@@ -277,6 +296,7 @@ export default function AdminPanel() {
               <div className="admin-label-chip">IMAGEM</div>
               <TextField 
                 name="imagem"
+                fullWidth
                 variant="outlined" 
                 size="small" 
                 value={formData.imagem} 
@@ -289,18 +309,18 @@ export default function AdminPanel() {
         )}
       </>
     );
-  };
+  };  
 
   const renderTable = () => {
     let headers = [];
     let data = [];
 
-    if (tabValue === 0) {
-      headers = ["ID", "Nome do Jogo", "Duração", "Gênero", "Plataformas"];
+    if (tabValue == 0) {
+      headers = ["ID", "Nome do Jogo", "Duração", "Gênero", "Plataformas", 'Link da Imagem'];
       data = jogos;
     } else {
       headers = ["ID", "Nome"];
-      data = tabValue === 1 ? generos : plataformas;
+      data = tabValue == 1 ? generos : plataformas;
     }
 
     return (
@@ -315,7 +335,7 @@ export default function AdminPanel() {
           </TableHead>
           <TableBody>
             {data.map((row) => {
-              const isSelected = row.id === formData.id;
+              const isSelected = row.id == formData.id;
               return (
                 <TableRow 
                   key={row.id} 
@@ -325,16 +345,28 @@ export default function AdminPanel() {
                   <TableCell className="admin-table-cell">{row.id}</TableCell>
                   <TableCell className="admin-table-cell">{row.nome}</TableCell>
                   
-                  {tabValue === 0 && (
+                  {tabValue == 0 && (
                     <>
                       <TableCell className="admin-table-cell">{row.tempo}</TableCell>
                       <TableCell className="admin-table-cell">
-                        {generos.find(g => g.id === row.generoId)?.nome || row.generoId}
+                        {generos.find(g => g.id == row.generoId)?.nome || ' - - -'}
                       </TableCell>
                       <TableCell className="admin-table-cell">
-                        {row.plataformasId?.map(pid => 
-                           plataformas.find(p => p.id === pid)?.nome
-                        ).join(', ')}
+                        {row.plataformasId.length > 0 ? row.plataformasId?.map(pid => 
+                           plataformas.find(p => p.id == pid)?.nome
+                        ).join(', ') : ' - - -'}
+                      </TableCell>
+                      <TableCell 
+                        className="admin-table-cell" 
+                        title={row.imagem}
+                        sx={{ 
+                          maxWidth: 150, 
+                          whiteSpace: 'nowrap', 
+                          overflow: 'hidden', 
+                          textOverflow: 'ellipsis' 
+                        }}
+                      >
+                        {row.imagem}
                       </TableCell>
                     </>
                   )}
@@ -365,9 +397,9 @@ export default function AdminPanel() {
           textColor="inherit"
           TabIndicatorProps={{ style: { backgroundColor: '#E65100' } }}
         >
-          <Tab label="Jogos" className={tabValue === 0 ? "admin-tab-selected" : ""} />
-          <Tab label="Gêneros" className={tabValue === 1 ? "admin-tab-selected" : ""} />
-          <Tab label="Plataformas" className={tabValue === 2 ? "admin-tab-selected" : ""} />
+          <Tab label="Jogos" className={tabValue == 0 ? "admin-tab-selected" : ""} />
+          <Tab label="Gêneros" className={tabValue == 1 ? "admin-tab-selected" : ""} />
+          <Tab label="Plataformas" className={tabValue == 2 ? "admin-tab-selected" : ""} />
         </Tabs>
 
         {loading ? (
@@ -375,14 +407,15 @@ export default function AdminPanel() {
             <CircularProgress size={60} sx={{ color: '#E65100' }} />
           </Box>
         ) : (
-          <Grid container spacing={4}>
-            <Grid item xs={12} md={8}>
-              <Box sx={{ pr: { md: 4 } }}>
+          <>
+          <Grid container spacing={4} className="admin-grid-container">
+            <Grid item xs={12} md={9} className="admin-form-container">
+              <Box sx={{ width: '100%' }}>
                 {renderFormFields()}
               </Box>
             </Grid>
 
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={3}>
               <Box className="admin-actions-container">              
                 <Button onClick={handleCreate} className="admin-action-btn btn-create">
                   CRIAR
@@ -394,15 +427,16 @@ export default function AdminPanel() {
                   EXCLUIR
                 </Button>
                 <Button onClick={resetForm} className="admin-action-btn btn-clear">
-                  LIMPAR SELEÇÃO
+                  LIMPAR
                 </Button>
               </Box>
             </Grid>
-
-            <Grid item xs={12}>
-              {renderTable()}
-            </Grid>
           </Grid>
+
+          <Grid item xs={12}>
+            {renderTable()}
+          </Grid>
+          </>
         )}
 
       </Paper>

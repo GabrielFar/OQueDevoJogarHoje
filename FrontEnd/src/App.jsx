@@ -24,14 +24,14 @@ export default function App() {
           handleLogout();
         }
       } catch (error) {
-        console.error("Erro ao decodificar token:", error);
+        console.error(error);
         handleLogout();
       }
     }
   }, []);
 
   const verificarPermissoes = (email) => {
-    if (email === "admin@playtoday.com") {
+    if (email == "admin@playtoday.com") {
       setIsAdmin(true);
     } else {
       setIsAdmin(false);

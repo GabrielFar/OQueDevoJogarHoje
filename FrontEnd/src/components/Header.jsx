@@ -4,7 +4,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import bannerImg from "/Banner.png";
 import "./styles.css";
 
-export default function Header({ userEmail, handleLogout, onNavigate, currentPage }) {
+export default function Header({ userEmail, handleLogout, onNavigate, currentPage, isAdmin }) {
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -17,11 +17,14 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
 
   const handleMenuClick = (item) => {
     handleCloseNavMenu();
-    if (item === "Admin") onNavigate("admin");
-    else if (item === "Quem Somos?") onNavigate("quemSomos");
+    if (item == "Admin") onNavigate("admin");
+    else if (item == "Quem Somos?") onNavigate("quemSomos");
   };
 
-  const navItems = ["Admin", "Quem Somos?"];
+  const navItems = ["Quem Somos?"];
+  if (isAdmin) {
+    navItems.unshift("Admin");
+  }
 
   const getButtonClassName = (itemName) => {
     const pageMap = {
@@ -29,8 +32,8 @@ export default function Header({ userEmail, handleLogout, onNavigate, currentPag
       "Quem Somos?": "quemSomos",
     };
 
-    const isActive = currentPage === pageMap[itemName];
-    const isSpecial = itemName === "Admin";
+    const isActive = currentPage == pageMap[itemName];
+    const isSpecial = itemName == "Admin";
 
     if (isSpecial && isActive) {
       return "header-nav-button header-nav-button-active";

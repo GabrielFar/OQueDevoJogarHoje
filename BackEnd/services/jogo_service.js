@@ -16,7 +16,7 @@ const criaJogo = async (req, res) => {
 	const { id, nome, generoId, plataformasId, tempo, imagem } = req.body;
 	console.log({ id, nome, generoId, plataformasId, tempo, imagem });
 	try {
-		if (!id || !nome || !generoId || !plataformasId || plataformasId.length === 0 || !tempo || !imagem) {
+		if (!id || !nome || !generoId || !plataformasId || plataformasId.length == 0 || !tempo || !imagem) {
 			return res
 				.status(400)
 				.json({ message: "ID, nome, genero, plataforms, tempo e imagem são obrigatórios." });
@@ -30,6 +30,11 @@ const criaJogo = async (req, res) => {
 			tempo,
 			imagem,
 		});
+
+		if (!jogo) {
+			return res.status(409).json({ message: "Já existe um jogo cadastrado com este ID." });
+		}
+
 		res.status(201).json(jogo);
 	} catch (error) {
 		console.log("Erro ao criar Jogo:", error);

@@ -1,4 +1,5 @@
 const generoRepository = require("../repositories/genero_repository");
+const jogoRepository = require("../repositories/jogo_repository")
 
 // Função para retornar todos os generos
 const retornaTodosGeneros = async (req, res) => {
@@ -26,6 +27,11 @@ const criaGenero = async (req, res) => {
       id,
       nome,
     });
+    
+		if (!genero) {
+			return res.status(409).json({ message: "Já existe um genero cadastrado com este ID." });
+		}
+
     res.status(201).json(genero);
   } catch (error) {
     console.log("Erro ao criar genero:", error);
@@ -81,6 +87,10 @@ const retornaGeneroPorId = async (req, res) => {
     const genero = await generoRepository.obterGeneroPorId({
       id,
     });
+
+    if(jogoRepository.deletarGeneroEPlataforma(id, true)){
+      console.log("Genero removido de jogos relacionados.");
+    }
 
     if (genero) {
       res.status(200).json(genero);

@@ -7,19 +7,25 @@ const obterTodosGeneros = () => {
 
 // Função para obter genero por ID
 const obterGeneroPorId = (id) => {
-	const result = generos.find(genero => genero.id === id);
+	const result = generos.find(genero => genero.id == id);
 	return result || null;
 };
 
 // Função para criar um novo genero
 const criarGenero = (genero) => {
+	const generoExistente = obterGeneroPorId(genero.id);
+	
+	if (generoExistente) {
+		return null;
+	}
+	
 	generos.push(genero);
 	return genero;
 };
 
 // Função para atualizar um genero
 const atualizarGenero = (genero) => {
-	const generoExistente = generos.find(g => g.id === genero.id);
+	const generoExistente = generos.find(g => g.id == genero.id);
 	if (!generoExistente) {
 		return null;
 	}
@@ -30,12 +36,13 @@ const atualizarGenero = (genero) => {
 
 // Função para deletar um genero
 const deletarGenero = (genero) => {
-	const index = generos.findIndex(g => g.id === genero.id);
-	if (index === -1) {
-		return false;
+	const index = generos.findIndex(g => g.id == genero.id);
+	if (index == -1) {
+		return null;
 	}
+	const retornarGenero = generos[index];
 	generos.splice(index, 1);
-	return true;
+	return retornarGenero;
 };
 
 module.exports = {

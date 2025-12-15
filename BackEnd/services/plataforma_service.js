@@ -1,4 +1,5 @@
 const plataformaRepository = require("../repositories/plataforma_repository");
+const jogoRepository = require("../repositories/jogo_repository")
 
 // Função para retornar todos os plataformas
 const retornaTodosPlataformas = async (req, res) => {
@@ -26,6 +27,11 @@ const criaPlataforma = async (req, res) => {
       id,
       nome,
     });
+
+		if (!plataforma) {
+			return res.status(409).json({ message: "Já existe uma plataforma cadastrada com este ID." });
+		}
+
     res.status(201).json(plataforma);
   } catch (error) {
     console.log("Erro ao criar plataforma:", error);
@@ -59,6 +65,10 @@ const deletaPlataforma = async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const plataformaRemovido = await plataformaRepository.deletarPlataforma({ id });
+
+    if(jogoRepository.deletarGeneroEPlataforma(id, false)){
+      console.log("Plataforma removida de jogos relacionados.");
+    }
 
     if (plataformaRemovido) {
       res.status(200).json({

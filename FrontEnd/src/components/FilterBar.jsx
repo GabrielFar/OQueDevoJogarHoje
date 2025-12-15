@@ -107,9 +107,9 @@ export default function FilterBar({ currentFilters, onFilterChange }) {
                 onChange={(e) => setTempDuracao(e.target.value)}
               >
                 <MenuItem value=""><em>Qualquer</em></MenuItem>
-                <MenuItem value="curto">Curto</MenuItem>
-                <MenuItem value="medio">Médio</MenuItem>
-                <MenuItem value="longo">Longo</MenuItem>
+                <MenuItem value="Curto">Curto</MenuItem>
+                <MenuItem value="Médio">Médio</MenuItem>
+                <MenuItem value="Longo">Longo</MenuItem>
               </Select>
             </FormControl>
 
