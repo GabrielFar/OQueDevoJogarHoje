@@ -56,7 +56,7 @@ const deletarGeneroEPlataforma = (chaveEstrangeira, ehGenero) => {
 			jogos[i].generoId = null;
 			removido = true;
 		} else if (jogos[i].plataformasId.includes(chaveEstrangeira)) {
-			jogos[i].plataformasId = jogos[i].plataformasId.filter(id => id !== chaveEstrangeira);
+			jogos[i].plataformasId = jogos[i].plataformasId.filter(id => id != chaveEstrangeira);
 			removido = true;
 		}
 	}

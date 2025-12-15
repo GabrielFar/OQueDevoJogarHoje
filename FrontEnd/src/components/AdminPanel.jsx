@@ -151,19 +151,19 @@ export default function AdminPanel() {
 
     if (tabValue == 0) {
       payload = {
-        id: formData.id !== "" ? formData.id : originalItem.id,
-        nome: formData.nome !== "" ? formData.nome : originalItem.nome,
+        id: formData.id != "" ? formData.id : originalItem.id,
+        nome: formData.nome != "" ? formData.nome : originalItem.nome,
         generoId: formData.generoId ? Number(formData.generoId) : originalItem.generoId,
         plataformasId: (formData.plataformasId && formData.plataformasId.length > 0) 
           ? formData.plataformasId 
           : originalItem.plataformasId,
-        tempo: formData.tempo !== "" ? formData.tempo : originalItem.tempo,
-        imagem: formData.imagem !== "" ? formData.imagem : originalItem.imagem
+        tempo: formData.tempo != "" ? formData.tempo : originalItem.tempo,
+        imagem: formData.imagem != "" ? formData.imagem : originalItem.imagem
       };
     } else {
       payload = {
-        id: formData.id !== "" ? formData.id : originalItem.id,
-        nome: formData.nome !== "" ? formData.nome : originalItem.nome
+        id: formData.id != "" ? formData.id : originalItem.id,
+        nome: formData.nome != "" ? formData.nome : originalItem.nome
       };
     }
 

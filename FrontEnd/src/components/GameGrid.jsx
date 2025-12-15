@@ -24,7 +24,7 @@ export default function GameGrid({ filters }) {
       return false;
     }
 
-    if (filters.genre && jogo.generoId !== filters.genre) {
+    if (filters.genre && jogo.generoId != filters.genre) {
       return false;
     }
 
@@ -32,7 +32,7 @@ export default function GameGrid({ filters }) {
       return false;
     }
 
-    if (filters.duration && jogo.tempo !== filters.duration) {
+    if (filters.duration && jogo.tempo != filters.duration) {
       return false;
     }
 
